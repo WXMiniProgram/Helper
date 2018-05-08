@@ -1,0 +1,34 @@
+<!-- 这是自定义组件的内部WXML结构 -->
+<view class="task-list">
+
+  <view class="task-list-top">
+    <!--<image class="headIcon" src="https://xxx.zhhhorizon.net/intl-console-web/pic/{{item.userId}}.JPG"></image>-->
+    <text class="userName">{{item.userId}}</text>
+  </view>
+
+  <!--<view class="task-list-bottomImg-container">
+    <image class="task-list-bottomImg" src="../../images/bg01.jpg"></image>
+  </view>-->
+
+  <view class="task-list-bottom">
+    <view class="task-list-bottom-left">
+      <text>{{item.srvTitle}}</text>
+    </view>
+    <view class="task-list-bottom-right">
+      <view class="task-list-bottom-right-time">
+        <view class='iconfont icon-time'></view>
+        <text>{{item.srvTime}}</text>
+      </view>
+      <view class="task-list-bottom-right-location">
+        <view class='iconfont icon-location'></view>
+        <text>{{item.srvDistance}}  m</text>
+      </view>
+      <view class="task-list-bottom-right-reward">
+        <view class='iconfont icon-recharge'></view>
+        <text>悬赏：{{item.srvCost}}</text>
+      </view>
+    </view>
+  </view>
+
+</view>
+<slot></slot>

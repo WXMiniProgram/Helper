@@ -1,1 +1,5 @@
-{}
+{
+  "usingComponents": {
+    "task-card": "../compTaskcard/compTaskcard"
+  }
+}
