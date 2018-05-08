@@ -80,14 +80,20 @@
 }
 
 .task-list-bottom-right-reward{
+  display: flex;
+  flex-direction: row;
   background-color: rosybrown;
 }
 
 .task-list-bottom-right-location{
+  display: flex;
+  flex-direction: row;
   background-color: darkseagreen;
 }
 
 .task-list-bottom-right-time{
+  display: flex;
+  flex-direction: row;
   background-color: palegoldenrod;
 }
 
