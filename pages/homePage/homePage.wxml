@@ -55,7 +55,7 @@
       <button class="circle-button-create" bindtap="goCreateTask" type="default" size="default"> + </button>
     </view>
     <view class="homepage-bottom-left-right">
-      <button class="circle-button" type="default" size="default"> + </button>
+      <button class="circle-button" bindtap='goMyInfo' type="default" size="default"> + </button>
     </view>
   </view>
 </view>

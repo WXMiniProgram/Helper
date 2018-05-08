@@ -1,2 +1,29 @@
 <!--pages/myInfo/myInfo.wxml-->
-<text>pages/myInfo/myInfo.wxml</text>
+<view class='myinfo-container'>
+  
+  <view class='wechat-info'>
+    <image class='wechat-info-avatar' src="{{userInfo.avatarUrl}}"></image>
+    <text class='wechat-info-nickname'>{{userInfo.nickName}}</text>
+  </view>
+
+  <view class='user-info'>
+
+    <view class='user-info-item'>
+      <label class='user-info-left'>我的信誉度</label>
+      <text class='user-info-right'>1000</text>
+    </view>
+
+    <view class='user-info-item'>
+      <label class='user-info-left'>我的手机</label>
+      <text class='user-info-right'>12345678999</text>
+    </view>
+    <view class='user-info-verify'>
+      <label class='user-info-left'>身份验证</label>
+    </view>
+  </view>
+
+  <view class='contact-us'>
+    联系我们
+  </view>
+
+</view>
