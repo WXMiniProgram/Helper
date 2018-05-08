@@ -1,0 +1,16 @@
+{
+  "pages":[
+    "pages/homePage/homePage",
+    "pages/createTask/createTask",
+    "pages/myInfo/myInfo",
+    "pages/taskDetail/taskDetail",
+    "pages/myTaskCreated/myTaskCreated",
+    "pages/myTaskGetting/myTaskGetting"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Helper",
+    "navigationBarTextStyle":"black"
+  }
+}

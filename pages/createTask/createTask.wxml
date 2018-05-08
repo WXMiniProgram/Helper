@@ -1,0 +1,66 @@
+<!--pages/createTask/createTask.wxml-->
+<view class='create-container'>
+  <view class='title-container'>
+    创建任务
+  </view>
+
+  <form bindsubmit='formSubmit' class='create-form'>
+    <view class='form-container'>
+
+      <view class='form-item'>
+        <label class='form-item-left' space='ensp'>标    题</label>
+        <input class='form-item-right' name='form-title-input' placeholder='输入简洁明了的标题'></input>
+      </view>
+
+      <view class='form-item'>
+        <label class='form-item-left'>任务类型</label>
+        <picker class="form-item-right" bindchange="bindTypeChange" value="{{typeIndex}}" range="{{typeArray}}">
+          <view class="picker-view">
+            {{curtype}}
+          </view>
+        </picker>
+      </view>
+
+      <view class='form-item'>
+         <label class='form-item-left' space='ensp'>赏    金</label>
+         <input class='form-item-right' placeholder='元'></input>
+         <!--<picker class=''></picker>-->
+      </view>
+
+      <view class='form-item'>
+        <label class='form-item-left' space='ensp'>截止时间</label>
+        <picker class="form-item-right" name="date" mode="date" value="{{date}}" start="2018-05-07" end="2019-02-01" bindchange="bindDateChange">
+          <view>
+            {{date}}
+          </view>
+          <!--<image class="publish-type-arrow" mode="aspectFill" src="../../images/arrow1.png" />-->
+        </picker>
+      </view>
+
+      <view class='form-item'>
+        <label class='form-item-left' space='ensp'>任务地点</label>
+        <button name="location" class="form-item-right" style='height: 40px' bindtap="chooseLocation">{{location}}</button>
+      </view>
+
+      <view class='form-describe'>
+        <view class='form-item-left'>
+          <label class='describe-label' space='ensp'>描    述</label>
+        </view>
+        <view class='form-item-right'>
+          <textarea class='describe-textarea' name="describe" placeholder="描述您的求助，清晰的描述有助于更快的获得帮助" />
+        </view>
+      </view>
+
+      <view class='form-item'>
+        <label class='form-item-left' space='ensp'>发 布 人</label>
+        <text class='form-item-right'>{{username}}</text>
+      </view>
+
+      <view class='form-button'>
+        <button class='form-create-button'>确定</button>
+      </view>
+
+    </view>
+  </form>
+
+</view>

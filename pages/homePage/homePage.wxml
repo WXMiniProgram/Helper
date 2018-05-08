@@ -1,0 +1,61 @@
+<!--homePage.wxml-->
+<view class="homepage-container">
+  <view class="homepage-top">
+    <picker class="homepage-top-left" bindchange="bindSortChange" value="{{sortIndex}}" range="{{sortArray}}">
+      <view class="picker-view">
+        <view class="homepage-top-icon"><icon type="download" color="rgb(0,0,0)"></icon></view>
+        {{sortArray[sortIndex]}}
+      </view>
+    </picker>
+    <picker class="homepage-top-right" bindchange="bindFilterChange" value="{{filterIndex}}" range="{{filterArray}}">
+      <view class="picker-view">
+        <view class="homepage-top-icon"><icon type="download" color="rgb(0,0,0)"></icon></view>
+        {{filterArray[filterIndex]}}
+      </view>
+    </picker>
+  </view>
+
+  <block wx:for="{{taskArray}}" wx:for-item="item">
+    <view class="task-list">
+      
+      <view class="task-list-top">
+          <!--<image class="headIcon" src="https://xxx.zhhhorizon.net/intl-console-web/pic/{{item.userId}}.JPG"></image>-->
+          <text class="userName">{{item.userId}}</text>
+      </view>
+      
+      <!--<view class="task-list-bottomImg-container">
+        <image class="task-list-bottomImg" src="../../images/bg01.jpg"></image>
+      </view>-->
+    
+      <view class="task-list-bottom">
+        <view class="task-list-bottom-left">
+          <text>{{item.srvTitle}}</text>
+        </view>
+        <view class="task-list-bottom-right">
+          <view class="task-list-bottom-right-time">
+            <text>{{item.srvTime}}</text>
+          </view>
+          <view class="task-list-bottom-right-location">
+            <text>{{item.srvDistance}}  m</text>
+          </view>
+          <view class="task-list-bottom-right-reward">
+            <text>悬赏：{{item.srvCost}}</text>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </block>
+
+  <view class="homepage-bottom">
+    <view class="homepage-bottom-left-right">
+      <button class="circle-button" type="default" size="default"> + </button>
+    </view>
+    <view class="homepage-bottom-center">
+      <button class="circle-button" bindtap="goCreateTask" type="default" size="default"> + </button>
+    </view>
+    <view class="homepage-bottom-left-right">
+      <button class="circle-button" type="default" size="default"> + </button>
+    </view>
+  </view>
+</view>
