@@ -105,10 +105,27 @@ Page({
     wx.navigateTo({
       url: '../createTask/createTask',
       success:function() {
+      
       },
       fail:function() {
+      
       },
       complete:function() {
+
+      }
+    })
+  },
+  goMyInfo:function() {
+    wx.navigateTo({
+      url: '../myInfo/myInfo',
+      success:function() {
+
+      },
+      fail:function() {
+
+      },
+      complete:function() {
+
       }
     })
   }
