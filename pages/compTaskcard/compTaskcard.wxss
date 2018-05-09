@@ -20,6 +20,7 @@
 .task-list-top{
   height: 30%;
   padding-left: 8px;
+  padding-bottom: 2px;
   border-bottom: 1px solid #C2C2C2;
 }
 

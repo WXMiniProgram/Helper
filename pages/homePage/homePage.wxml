@@ -3,10 +3,7 @@
   <view class="homepage-top">
     <picker class="homepage-top-left" bindchange="bindSortChange" value="{{sortIndex}}" range="{{sortArray}}">
       <view class="picker-view">
-        <view class="homepage-top-icon">
-          <!--<icon type="download" color="rgb(0,0,0)"></icon>-->
-          <view class='iconfont icon-order'></view>
-        </view>
+        <view class='homepage-top-icon iconfont icon-order'></view>
         {{sortArray[sortIndex]}}
       </view>
     </picker>
@@ -31,17 +28,17 @@
   <view class="homepage-bottom">
     <view class="homepage-bottom-left-right">
       <button class="circle-button" type="default" size="default">
-        <view class='iconfont icon-form'></view>
+        <view class='iconfont icon-form homepage-bottom-icon'></view>
       </button>
     </view>
     <view class="homepage-bottom-center">
-      <button class="circle-button-create" bindtap="goCreateTask" type="default" size="default" style='background-color: yellow'>
-        <view class='iconfont icon-add'></view>
+      <button class="circle-button create-button" bindtap="goCreateTask" type="default" size="default" style='background-color: yellow'>
+        <view class='iconfont icon-add homepage-create-icon'></view>
       </button>
     </view>
     <view class="homepage-bottom-left-right">
       <button class="circle-button" bindtap='goMyInfo' type="default" size="default">
-        <view class='iconfont icon-people'></view>
+        <view class='iconfont icon-people homepage-bottom-icon'></view>
       </button>
     </view>
   </view>
