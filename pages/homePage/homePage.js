@@ -27,7 +27,7 @@ Page({
         longitude: 113.324520,
         posDes: "上海市人民广场",
         picUrl: '../../images/bg01.jpg',
-        userId: "-欣欣欣欣-",
+        userId: "For Smurf's Sake",
         userUrl: "../../images/img01.jpg",
         srvDistance: 2,
         srvTime: "今天 12:00",

@@ -22,9 +22,9 @@
     <task-card class='taskcard'>
       <text slot='slot-user-id'>{{item.userId}}</text>
       <text slot='slot-srv-title'>{{item.srvTitle}}</text>
-      <text slot='slot-srv-time'>{{item.srvTime}}</text>
-      <text slot='slot-srv-distance'>{{item.srvDistance}}  m</text>
-      <text slot='slot-srv-cost'>悬赏：{{cardItem.srvCost}}</text>
+      <text slot='slot-srv-time' decode='true'>&nbsp;{{item.srvTime}}</text>
+      <text slot='slot-srv-distance' decode='true'>&nbsp;{{item.srvDistance}}  m</text>
+      <text slot='slot-srv-cost' decode='true'>&nbsp;悬赏：{{cardItem.srvCost}}</text>
     </task-card>
   </block>
 
@@ -35,7 +35,7 @@
       </button>
     </view>
     <view class="homepage-bottom-center">
-      <button class="circle-button-create" bindtap="goCreateTask" type="default" size="default">
+      <button class="circle-button-create" bindtap="goCreateTask" type="default" size="default" style='background-color: yellow'>
         <view class='iconfont icon-add'></view>
       </button>
     </view>
