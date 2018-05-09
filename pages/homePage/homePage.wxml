@@ -18,8 +18,14 @@
     </picker>
   </view>
 
-  <block wx:for="{{taskArray}}" wx:for-item="item">
-    <task-card class='taskcard'></task-card>
+  <block wx:for="{{taskArray}}" wx:key="taskId" wx:for-item="item">
+    <task-card class='taskcard'>
+      <text slot='slot-user-id'>{{item.userId}}</text>
+      <text slot='slot-srv-title'>{{item.srvTitle}}</text>
+      <text slot='slot-srv-time'>{{item.srvTime}}</text>
+      <text slot='slot-srv-distance'>{{item.srvDistance}}  m</text>
+      <text slot='slot-srv-cost'>悬赏：{{cardItem.srvCost}}</text>
+    </task-card>
   </block>
 
   <view class="homepage-bottom">

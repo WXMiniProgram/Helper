@@ -1,4 +1,7 @@
 /* 这里的样式只应用于这个自定义组件 */
+
+@import "../../lib/style/lib.wxss";
+
 .task-list{
   width: 100%;
   height: 125px;
