@@ -21,13 +21,13 @@ Page({
         srvTitle: "取快递",
         srvDesc: "如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递~谢谢啦",
         srvCost: 500,
-        taskId: "00001"
+        taskId: "00000"
       }, {
         latitude: 23.099794,
         longitude: 113.324520,
         posDes: "上海市人民广场",
         picUrl: '../../images/bg01.jpg',
-        userId: "-欣欣欣欣-",
+        userId: "For Smurf's Sake",
         userUrl: "../../images/img01.jpg",
         srvDistance: 2,
         srvTime: "今天 12:00",
@@ -102,13 +102,14 @@ Page({
     console.log("bindFilterChange")
   },
   goCreateTask:function() {
+    console.log('goCreateTask')
     wx.navigateTo({
       url: '../createTask/createTask',
       success:function() {
-      
+        console.log('success')
       },
       fail:function() {
-      
+        console.log('fail')
       },
       complete:function() {
 

@@ -11,21 +11,22 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  background-color: #fff;
   border-bottom:1px solid #999;
 }
 
 .homepage-top-left{
-  width:65%;
+  width:50%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   border-right: 1px solid #999;
 }
 
 .homepage-top-right{
-  width:35%;
+  width:50%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .picker-view{
@@ -34,67 +35,12 @@
 }
 
 .homepage-top-icon{
-  padding-top: 5px;
   padding-right: 8px;
-  padding-left: 5px;
+  padding-left: 8px;
 }
 
-.task-list{
+.taskcard{
   width: 85%;
-  height: 125px;
-  display:flex;
-  flex-direction: column;
-  margin-top: 15px;
-  padding-top: 8px;
-  background-color: red;
-  position:relative;
-}
-
-.task-list-top{
-  height: 30%;
-  padding-left: 8px;
-  background-color: yellow;
-}
-
-.task-list-bottom{
-  height:100%;
-  display:flex;
-  flex-direction: row;
-  background-color: yellowgreen;
-}
-
-.task-list-bottom-left{
-  width:60%;
-  display: flex;
-  align-items: center;
-  padding-left: 8px;
-  font-size: 25px;
-  background-color: bisque;
-}
-
-.task-list-bottom-right{
-  width:40%;
-  display:flex;
-  flex-direction: column-reverse;
-  background-color: azure;
-}
-
-.task-list-bottom-right-reward{
-  display: flex;
-  flex-direction: row;
-  background-color: rosybrown;
-}
-
-.task-list-bottom-right-location{
-  display: flex;
-  flex-direction: row;
-  background-color: darkseagreen;
-}
-
-.task-list-bottom-right-time{
-  display: flex;
-  flex-direction: row;
-  background-color: palegoldenrod;
 }
 
 .homepage-bottom{
@@ -106,7 +52,6 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: powderblue;
 }
 
 .homepage-bottom-left-right{
@@ -114,7 +59,6 @@
   height: 100%;
   display: flex;
   align-items: center;
-  background-color: blue;
 }
 
 .homepage-bottom-center{
@@ -124,7 +68,6 @@
   margin-right: 8px;
   display: flex;
   align-items: center;
-  background-color: blue;
 }
 
 .circle-button{
@@ -136,13 +79,19 @@
   justify-content: center;
 }
 
-.circle-button-create{
-  height: 75px;
-  width: 75px;
+.create-button{
+  height: 83px;
+  width: 83px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 50px;
-  padding-bottom: 8px;
+}
+
+.homepage-bottom-icon{
+  font-size: 25px;
+}
+
+.homepage-create-icon{
+  font-size: 45px;
 }
