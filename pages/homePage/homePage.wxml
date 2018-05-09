@@ -3,13 +3,16 @@
   <view class="homepage-top">
     <picker class="homepage-top-left" bindchange="bindSortChange" value="{{sortIndex}}" range="{{sortArray}}">
       <view class="picker-view">
-        <view class="homepage-top-icon"><icon type="download" color="rgb(0,0,0)"></icon></view>
+        <view class="homepage-top-icon">
+          <!--<icon type="download" color="rgb(0,0,0)"></icon>-->
+          <view class='iconfont icon-order'></view>
+        </view>
         {{sortArray[sortIndex]}}
       </view>
     </picker>
     <picker class="homepage-top-right" bindchange="bindFilterChange" value="{{filterIndex}}" range="{{filterArray}}">
       <view class="picker-view">
-        <view class="homepage-top-icon"><icon type="download" color="rgb(0,0,0)"></icon></view>
+        <view class='homepage-top-icon iconfont icon-filter'></view>
         {{filterArray[filterIndex]}}
       </view>
     </picker>
@@ -33,12 +36,15 @@
         </view>
         <view class="task-list-bottom-right">
           <view class="task-list-bottom-right-time">
+            <view class='iconfont icon-time'></view>
             <text>{{item.srvTime}}</text>
           </view>
           <view class="task-list-bottom-right-location">
+            <view class='iconfont icon-location'></view>
             <text>{{item.srvDistance}}  m</text>
           </view>
           <view class="task-list-bottom-right-reward">
+            <view class='iconfont icon-recharge'></view>
             <text>悬赏：{{item.srvCost}}</text>
           </view>
         </view>
@@ -49,13 +55,19 @@
 
   <view class="homepage-bottom">
     <view class="homepage-bottom-left-right">
-      <button class="circle-button" type="default" size="default"> + </button>
+      <button class="circle-button" type="default" size="default">
+        <view class='iconfont icon-form'></view>
+      </button>
     </view>
     <view class="homepage-bottom-center">
-      <button class="circle-button-create" bindtap="goCreateTask" type="default" size="default"> + </button>
+      <button class="circle-button-create" bindtap="goCreateTask" type="default" size="default">
+        <view class='iconfont icon-add'></view>
+      </button>
     </view>
     <view class="homepage-bottom-left-right">
-      <button class="circle-button" bindtap='goMyInfo' type="default" size="default"> + </button>
+      <button class="circle-button" bindtap='goMyInfo' type="default" size="default">
+        <view class='iconfont icon-people'></view>
+      </button>
     </view>
   </view>
 </view>
