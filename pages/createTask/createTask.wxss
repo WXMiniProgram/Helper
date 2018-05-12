@@ -1,21 +1,4 @@
 /* pages/createTask/createTask.wxss */
-.create-container{
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.title-container{
-  line-height: 40px;
-  font-size: 25px;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  margin-top: 15px;
-}
-
 .form-container{
   margin-left: 20px;
   margin-right: 20px;
@@ -23,51 +6,26 @@
   flex-direction: column;
 }
 
-.form-item{
-  height: 40px;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border: 1px solid #999;
-  background-color: papayawhip;
+.form-item {
+  /*display: flex;margin-bottom: 50rpx;*/
+  /*flex-direction: row;*/
+  background-color: red;
+  min-height: 70rpx;
 }
 
-.form-item-left{
-  width: 30%;
+.form-item-inline {
+    display: inline-flex;
+    flex-direction: row;
 }
-
-.form-item-right{
-  width: 70%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
+.item-inline-label {
+    flex-grow: 1
 }
-
-.form-describe{
-  height: 100px;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: powderblue;
-  border: 1px solid #999;
-}
-
-.describe-label{
-  height: 100%;
-  top: 0;
-}
-
-.describe-textarea{
+.item-inline-input {
+    flex-grow: 2
 }
 
 .form-button{
   margin-top: 28px;
   display: flex;
   justify-content: center;
-}
-
-.form-create-button{
-  width: 85%;
 }

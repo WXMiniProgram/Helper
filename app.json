@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/homePage/homePage",
     "pages/createTask/createTask",
+    "pages/homePage/homePage",
     "pages/myInfo/myInfo",
     "pages/taskDetail/taskDetail",
     "pages/myTaskCreated/myTaskCreated",

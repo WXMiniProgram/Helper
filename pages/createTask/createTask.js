@@ -1,4 +1,5 @@
 // pages/createTask/createTask.js
+var util = require('../../utils/util.js');
 Page({
 
   /**
@@ -7,10 +8,16 @@ Page({
   data: {
     typeIndex: 0,
     typeArray: ['取快递', '借东西', '帮带东西', '其他'],
-    curtype: '请选择',
+    bountyArray:["0", "1", "2", "3", "5"],
+    defaultPick: '请选择',
     date: "2018-05-07",
-    time: "12:01",
-    location: "选择我的位置",
+    now: util.formatTime(new Date(), false),
+    location:{
+        "name": "选择位置",
+        "address":"",
+        "latitude":0,
+        "longitude":0
+    },
     username: 'Cuttlefish',
   },
 
@@ -23,6 +30,15 @@ Page({
       curtype: that.data.typeArray[i]
     });
     console.log("bindSortChange")
+  },
+  bindBountyChange: function (e) {
+      var that = this;
+      var i = e.detail.value;
+      that.setData({
+          bountyIndex: i,
+          curtype: that.data.typeArray[i]
+      });
+      console.log("bindSortChange")
   },
   bindDateChange: function (e) {
     this.setData({
@@ -38,11 +54,14 @@ Page({
         var longitudeCur = res.longitude;
         var name = res.name;
         var address = res.address;
-        console.log(name);
+        var loc = {
+            "name": res.name,
+            "address": res.address,
+            "latitude": res.latitude,
+            "longitude": res.longitude 
+        }
         that.setData({
-          location: name,
-          latitude: latitudeCur,
-          longitude: longitudeCur
+          location:loc
         })
       }
     });
