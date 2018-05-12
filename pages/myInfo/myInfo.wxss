@@ -4,9 +4,7 @@
   display: flex;
   flex-direction: column;
 }
-
 .wechat-info{
-  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,49 +12,17 @@
 }
 
 .wechat-info-avatar{
-  height: 100px;
-  width: 100px;
+  height: 200rpx;
+  width: 200rpx;
   border-radius: 50%;
 }
 
 .wechat-info-nickname{
-  padding-top: 10px;
-  display: flex;
-  justify-content: center;
+  margin-top: 30rpx;
 }
 
 .user-info{
-  margin: 25px;
+  margin-top: 60rpx;
   display: flex;
   flex-direction: column;
-}
-
-.user-info-item{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 40px;
-  width: 100%;
-  border-bottom: 1px solid #999;
-}
-
-.user-info-verify{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 40px;
-  width: 100%;
-  border-bottom: 1px solid #999;
-}
-
-.user-info-left{
-  width: 40%;
-}
-
-.contact-us{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  bottom: 15px;
-  position: fixed;
 }

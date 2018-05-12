@@ -8,10 +8,11 @@ Page({
   data: {
     typeIndex: 0,
     typeArray: ['取快递', '借东西', '帮带东西', '其他'],
-    bountyArray:["0", "1", "2", "3", "5"],
+    bountyArray:["0", "1", "2", "3", "4", "5"],
     defaultPick: '请选择',
     date: "2018-05-07",
     now: util.formatTime(new Date(), false),
+    hasPrivate: false,
     location:{
         "name": "选择位置",
         "address":"",
@@ -19,6 +20,26 @@ Page({
         "longitude":0
     },
     username: 'Cuttlefish',
+    publisher:[{
+      name: "i",
+      attrs:{
+        style: "color:blue"
+      },
+      children:[{
+        type: "text",
+        text: "cuttlefish"
+      }]
+    }],
+    hunter: [{
+      name: "i",
+      attrs: {
+        style: "color:yellow"
+      },
+      children: [{
+        type: "text",
+        text: "待领取"
+      }]
+    }]
   },
 
   bindTypeChange: function (e) {
@@ -30,6 +51,13 @@ Page({
       curtype: that.data.typeArray[i]
     });
     console.log("bindSortChange")
+  },
+  bindSwitchChange: function(e) {
+    var that = this;
+    var i = e.detail.value;
+    that.setData({
+      hasPrivate: i,
+    });
   },
   bindBountyChange: function (e) {
       var that = this;

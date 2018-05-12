@@ -8,7 +8,7 @@
 
       <view class='form-item form-item-inline'>
         <label class='form-item-label item-inline-label'>任务类型：</label>
-        <picker class="form-item-input item-inline-input" bindchange="bindTypeChange" value="{{typeIndex}}" range="{{typeArray}}">
+        <picker class="item-inline-input" bindchange="bindTypeChange" value="{{typeIndex}}" range="{{typeArray}}">
           <view class="picker-view">
             {{defaultPick}}
           </view>
@@ -17,7 +17,7 @@
 
       <view class='form-item form-item-inline'>
          <label class='form-item-label item-inline-label' space="ensp">赏金(元) ：</label>
-         <picker class="form-item-input item-inline-input" bindchange="bindBountyChange" range="{{bountyArray}}">
+         <picker class="item-inline-input" bindchange="bindBountyChange" range="{{bountyArray}}">
             <view class="picker-view">
             {{defaultPick}}
             </view>
@@ -27,7 +27,7 @@
 
       <view class='form-item form-item-inline'>
         <label class='form-item-label item-inline-label' space='ensp'>截止时间：</label>
-        <picker class="form-item-input item-inline-input" name="date" mode="time" value="{{date}}" start="6:10" end="13:59">
+        <picker class="item-inline-input" name="date" mode="time" value="{{date}}" start="6:10" end="13:59">
           <view>
             {{now}}
           </view>
@@ -35,23 +35,34 @@
         </picker>
       </view>
 
-      <view class='form-item form-item-inline'>
-        <label class='form-item-label item-inline-label' space='ensp'>任务地点：</label>
-        <input class="form-item-input item-inline-input" placeholder='告诉对方应到哪里帮你~'></input>
+      <view class='form-item'>
+        <label class='form-item-label' space='ensp'>任务地点：</label>
+        <textarea class="form-item-input" row="2" placeholder='告诉对方到哪里帮你~'></textarea>
       </view>
 
       <view class='form-item'>
         <label class='form-item-label' space='ensp'>详细描述：</label>
-        <textarea class='form-item-input' name="describe" placeholder="描述您的求助，清晰的描述有助于更快的获得帮助"/>
+        <textarea id="task-detail" class='form-item-input' name="describe" row="4" col="10" placeholder="\不要在此处写类似“快递箱密码”等私密信息"/>
+      </view>
+      <view class='form-item form-item-inline'>
+        <label class='form-item-label item-inline-label' space='ensp'>隐藏信息：</label>
+        <switch id='toggle-switch' class='item-inline-input' bindchange='bindSwitchChange'></switch>
+      </view>
+      <view wx:if="{{hasPrivate}}" class='form-item'>
+        <textarea  id="task-detail" class='form-item-input' name="describe" row="3" col="10" placeholder="快递箱密码等私密信息（仅能被领取者看到）"/>
+      </view>
+      <view class='form-item form-item-inline'>
+        <label class='item-inline-label' space='ensp'>发 布 人：</label>
+        <rich-text nodes="{{publisher}}" class='item-inline-input'>{{username}}</rich-text>
+      </view>
+      <view class='form-item form-item-inline'>
+        <label class='item-inline-label' space='ensp'>领 取 人：</label>
+        <rich-text nodes="{{hunter}}" class='item-inline-input'></rich-text>
       </view>
       <view class='form-item'>
-        <label class='form-item-left' space='ensp'>发 布 人</label>
-        <text class='form-item-right'>{{username}}</text>
+        <button class='form-create-button' plain="true" form-type='submit' type="primary">确定</button>
+        <button class='form-create-button' plain="true" type="warn">撤回任务</button>
       </view>
-      <view class='form-button'>
-        <button class='form-create-button'>确定</button>
-      </view>
-
     </view>
   </form>
 
