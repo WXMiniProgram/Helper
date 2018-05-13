@@ -1,13 +1,36 @@
 /**app.wxss**/
 
 @import "./lib/style/lib.wxss";
-
+@import "weui.wxss";
 .container {
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
   box-sizing: border-box;
+}
+
+.form-item-inline {
+    display: inline-flex;
+    flex-direction: row;
+}
+.item-inline-label {
+    flex-grow: 1
+}
+.item-inline-input {
+    flex-grow: 2
+}
+
+.avatar-circle {
+    border-radius: 50%;
+}
+.avatar {
+    width:150rpx; 
+    height: 150rpx;
+    vertical-align: middle;
+}
+.avatar-sm {
+    width:50rpx; 
+    height: 50rpx;
+    vertical-align: middle;
 }

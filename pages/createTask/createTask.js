@@ -7,18 +7,33 @@ Page({
    */
   data: {
     typeIndex: 0,
-    typeArray: ['取快递', '借东西', '帮带东西', '其他'],
-    bountyArray:["0", "1", "2", "3", "5"],
+    typeArray: ['全部','取快递', '借东西', '帮带东西', '其他'],
+    bountyArray:["0", "1", "2", "3", "4", "5"],
+    bountyIndex: 0,
     defaultPick: '请选择',
-    date: "2018-05-07",
-    now: util.formatTime(new Date(), false),
+    date: util.formatDate(new Date()),
+    time: util.formatTime(new Date(), false),
+    hasPrivate: false,
+    task_status: 4, // 0：新任务 1：待领取 2：已领取 3：进行中 4：已完成
+    isPublisher: false, // 临时加的 判断是不是当前用户创建的这个任务
     location:{
-        "name": "选择位置",
+        "name": "任意",
         "address":"",
         "latitude":0,
         "longitude":0
     },
     username: 'Cuttlefish',
+    publisher:[{
+      name: "i",
+      attrs:{
+        style: "color:blue"
+      },
+      children:[{
+        type: "text",
+        text: "cuttlefish"
+      }]
+    }],
+    hunter_info:null
   },
 
   bindTypeChange: function (e) {
@@ -31,12 +46,18 @@ Page({
     });
     console.log("bindSortChange")
   },
+  bindSwitchChange: function(e) {
+    var that = this;
+    var i = e.detail.value;
+    that.setData({
+      hasPrivate: i,
+    });
+  },
   bindBountyChange: function (e) {
       var that = this;
       var i = e.detail.value;
       that.setData({
           bountyIndex: i,
-          curtype: that.data.typeArray[i]
       });
       console.log("bindSortChange")
   },

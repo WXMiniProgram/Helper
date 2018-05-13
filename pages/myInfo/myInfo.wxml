@@ -1,29 +1,29 @@
 <!--pages/myInfo/myInfo.wxml-->
-<view class='myinfo-container'>
-  
+<view class='container'>
   <view class='wechat-info'>
-    <image class='wechat-info-avatar' src="{{userInfo.avatarUrl}}"></image>
-    <text class='wechat-info-nickname'>{{userInfo.nickName}}</text>
+    <image class='wechat-info-avatar' src="../../images/bg01.jpg"></image>
+    <text class='wechat-info-nickname'>nickname</text>
   </view>
 
   <view class='user-info'>
-
-    <view class='user-info-item'>
-      <label class='user-info-left'>我的信誉度</label>
-      <text class='user-info-right'>1000</text>
+    <view class='form-item-inline'>
+      <label class='inline-item-label'>信誉度：{{score}} 分</label>
     </view>
+    <view class='form-item-inline'>
+      <label class='inline-item-label'>身份验证：</label>
+      <view wx:if="hasVerify==2">
+        <icon  type="success_no_circle" size="20"/> <text style='color:green'>已验证</text>  
+      </view>
+      <view wx:elif="hasVerify==1">
+        <icon  type="info_no_circle" size="20"/> <text style='color:blue'>审核中</text> 
+      </view>
+      <view wx:else>
+        <icon type="warn_no_circle" size="20"/> <text style='color:red'>未审核</text> 
 
-    <view class='user-info-item'>
-      <label class='user-info-left'>我的手机</label>
-      <text class='user-info-right'>12345678999</text>
+      </view>
     </view>
-    <view class='user-info-verify'>
-      <label class='user-info-left'>身份验证</label>
+    <view class="form-item-inline">
     </view>
-  </view>
-
-  <view class='contact-us'>
-    联系我们
   </view>
 
 </view>
