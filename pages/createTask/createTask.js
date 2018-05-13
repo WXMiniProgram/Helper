@@ -7,14 +7,18 @@ Page({
    */
   data: {
     typeIndex: 0,
-    typeArray: ['取快递', '借东西', '帮带东西', '其他'],
+
+    typeArray: ['全部','取快递', '借东西', '帮带东西', '其他'],
     bountyArray:["0", "1", "2", "3", "4", "5"],
+    bountyIndex: 0,
     defaultPick: '请选择',
-    date: "2018-05-07",
-    now: util.formatTime(new Date(), false),
+    date: util.formatDate(new Date()),
+    time: util.formatTime(new Date(), false),
     hasPrivate: false,
+    task_status: 4, // 0：新任务 1：待领取 2：已领取 3：进行中 4：已完成
+    isPublisher: false, // 临时加的 判断是不是当前用户创建的这个任务
     location:{
-        "name": "选择位置",
+        "name": "任意",
         "address":"",
         "latitude":0,
         "longitude":0
@@ -30,16 +34,7 @@ Page({
         text: "cuttlefish"
       }]
     }],
-    hunter: [{
-      name: "i",
-      attrs: {
-        style: "color:yellow"
-      },
-      children: [{
-        type: "text",
-        text: "待领取"
-      }]
-    }]
+    hunter_info:null
   },
 
   bindTypeChange: function (e) {
@@ -64,7 +59,6 @@ Page({
       var i = e.detail.value;
       that.setData({
           bountyIndex: i,
-          curtype: that.data.typeArray[i]
       });
       console.log("bindSortChange")
   },
@@ -94,60 +88,9 @@ Page({
       }
     });
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  gotoPublisher: function(){
+    wx.navigateTo({
+        url: '../myInfo/myInfo',
+    })
   }
 })

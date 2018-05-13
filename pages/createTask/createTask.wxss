@@ -1,37 +1,11 @@
 /* pages/createTask/createTask.wxss */
-.form-container{
-  margin-left: 20rpx;
-  margin-right: 20rpx;
-  display: flex;
-  flex-direction: column;
+
+#location {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-.form-item {
-  margin-top: 20rpx;
-}
-
-.form-item-input {
-  border:1px solid gainsboro;
-}
-
-.form-button{
-  margin-top: 28px;
-  display: flex;
-  justify-content: center;
-}
-
-textarea {
-  border: 1px solid rgb(150,150,150);
-  height: 150rpx;
-  display: block;
-}
-
-#publisher {
-  color: aquamarine;
-}
-#hunter {
-  color: coral;
-}
-#toggle-switch {
-  height: 60%;
+.avatar-circle {
+    margin-right: 10rpx;
 }

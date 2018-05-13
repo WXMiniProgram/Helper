@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "check-card": "../compCheckCard/compCheckCard"
+    },
+    "navigationBarTitleText": "审核列表"
+}

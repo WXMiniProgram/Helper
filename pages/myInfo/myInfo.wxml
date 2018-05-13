@@ -1,29 +1,55 @@
 <!--pages/myInfo/myInfo.wxml-->
 <view class='container'>
-  <view class='wechat-info'>
-    <image class='wechat-info-avatar' src="../../images/bg01.jpg"></image>
-    <text class='wechat-info-nickname'>nickname</text>
-  </view>
 
-  <view class='user-info'>
-    <view class='form-item-inline'>
-      <label class='inline-item-label'>信誉度：{{score}} 分</label>
+    <view class='wechat-info'>
+        <image class='avatar-bg avatar-circle' src="../../images/bg01.jpg"></image>
+        <text class='wechat-info-nickname'>nickname</text>
     </view>
-    <view class='form-item-inline'>
-      <label class='inline-item-label'>身份验证：</label>
-      <view wx:if="hasVerify==2">
-        <icon  type="success_no_circle" size="20"/> <text style='color:green'>已验证</text>  
-      </view>
-      <view wx:elif="hasVerify==1">
-        <icon  type="info_no_circle" size="20"/> <text style='color:blue'>审核中</text> 
-      </view>
-      <view wx:else>
-        <icon type="warn_no_circle" size="20"/> <text style='color:red'>未审核</text> 
-
-      </view>
+    <view class="weui-cells__title">我的信息</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">信誉值</view>
+            <view class="weui-cell__ft">{{score}}</view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">手机号</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" placeholder="这是对方与您最重要的联系方式"/>
+            </view>
+        </view>
+        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+                <view class="text-withbadge">我发布过的</view>
+                <view class="badge weui-badge" >{{publishedNum}}</view>
+            </view>
+            
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+                <view class="text-withbadge">我领取过的</view>
+                <view class="badge weui-badge">{{huntedNum}}</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
     </view>
-    <view class="form-item-inline">
+    
+    <view class="weui-cells__title">身份验证</view>
+    <view class="weui-cells weui-cells_after-title">
+        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view wx:if="{{verify_status == 0}}" class="weui-cell__bd">
+                <icon type="warn" size="20" color="#FFBE00"></icon> 未验证
+            </view>
+            <view wx:elif="{{verify_status == 1}}" class="weui-cell__bd">
+                <icon type="waiting" size="20"></icon> 审核中
+            </view>
+            <view wx:elif="{{verify_status == 2}}" class="weui-cell__bd">
+                <icon type="success" size="20"></icon> 已验证
+            </view>
+            <view wx:if="{{verify_status == 0}}" class="weui-cell__ft weui-cell__ft_in-access">去验证</view>
+        </navigator>
     </view>
-  </view>
-
+ 
 </view>

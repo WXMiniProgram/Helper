@@ -1,0 +1,4 @@
+/* pages/checkList/checkList.wxss */
+.weui-form-preview {
+    margin-top: 60rpx;
+}
