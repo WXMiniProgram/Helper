@@ -1,11 +1,13 @@
 {
   "pages":[
-    "pages/createTask/createTask",
-    "pages/homePage/homePage",
+      "pages/createTask/createTask",
+      "pages/checkList/checkList",
+    "pages/response/response_success",
+      "pages/uploadImg/uploadImg",
     "pages/myInfo/myInfo",
-    "pages/taskDetail/taskDetail",
-    "pages/myTaskCreated/myTaskCreated",
-    "pages/myTaskGetting/myTaskGetting"
+    
+    "pages/response/response_fail",
+    "pages/homePage/homePage"
   ],
   "window":{
     "backgroundTextStyle":"light",

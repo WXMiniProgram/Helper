@@ -1,1 +1,10 @@
 /* pages/createTask/createTask.wxss */
+#location {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.avatar-circle {
+    margin-right: 10rpx;
+}

@@ -1,4 +1,4 @@
-// pages/myTaskCreated/myTaskCreated.js
+// pages/response/response_success.js
 Page({
 
   /**

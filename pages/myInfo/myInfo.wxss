@@ -9,6 +9,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 60rpx;
 }
 
 .wechat-info-avatar{
