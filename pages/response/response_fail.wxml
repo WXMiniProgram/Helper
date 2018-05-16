@@ -9,7 +9,7 @@
         </view>
         <view class="weui-msg__opr-area">
             <view class="weui-btn-area">
-                <button class="weui-btn" type="primary">返回首页</button>
+                <button class="weui-btn" bindtap='returnHome' type="primary">返回首页</button>
             </view>
         </view>
         

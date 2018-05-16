@@ -1,39 +1,81 @@
 //app.js
 App({
-  onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    onLaunch: function () {
+        // 展示本地存储能力
+        var logs = wx.getStorageSync('logs') || []
+        var that = this;
+        logs.unshift(Date.now())
+        wx.setStorageSync('logs', logs)
 
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
+        // 登录
+        wx.login({
             success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
+                that.reqToServer("http://127.0.0.1:3000/login/"+res.code, "GET", null, (res)=>{
+                    that.globalData.userinfo = res.user;
+                });
+                // 发送 res.code 到后台换取 openId, sessionKey, unionId
             }
-          })
+        })
+    },
+    globalData: {
+        userInfo: null
+        /*
+        {
+            openid: unique,
+            username:String
+            avatar:url String
+            score:number
+            verify:boolean
         }
-      }
-    })
-  },
-  globalData: {
-    userInfo: null
-  }
+         */
+    },
+    // 　　const app = getApp()    其他文件 加这句就可以使用app.js里的内容 如app.toServer
+    
+    reqToServer: function(url, method="GET", formData=null, succfunc=function(){}, errfunc=function(){}){
+        wx.request({
+            url: url,
+            method: method.toUpperCase(), // 必须为大写
+            data: formData,
+            //dataType: "json",
+            header: {
+                'content-type': 'application/json' // 默认值
+            },
+            success: succfunc,
+            fail: errfunc
+        })
+    },
+    uploadToServer: function(url, filePath, fileKey, formData, succfunc, errfunc){
+        wx.uploadFile({
+            url: url,
+            filePath: filePath,
+            name: fileKey,
+            formData: formData,
+            success: succfunc, // success(res) res.data
+            fail: errfunc
+        })
+    },
+    openConfirm: function (title, content, confirmText, cancelText, func) {
+        wx.showModal({
+            title: title,
+            content: content,
+            confirmText: confitmText,
+            cancelText: cancelText,
+            success: func
+            /*success: function (res) {
+                console.log(res);
+                if (res.confirm) {
+                    console.log('用户点击主操作')
+                } else {
+                    console.log('用户点击辅助操作')
+                }
+            }*/
+        });
+    },
+    openToast: function(title, duration = 3000){
+        wx.showToast({
+            title: title,
+            icon: 'success',
+            duration: duration
+        });
+    }
 })

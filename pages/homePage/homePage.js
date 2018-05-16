@@ -5,7 +5,7 @@ const app = getApp()
 Page({
   data: {
     sortIndex: 0,
-    sortArray: ['综合', '距离', '赏金'],
+    sortArray: ['距离', '赏金', '时间'],
     filterIndex: 0,
     filterArray: ['全部', '取快递', '借东西', '其他'],
     taskArray: [
@@ -101,33 +101,47 @@ Page({
     });
     console.log("bindFilterChange")
   },
+  goTaskDetail: function(){
+    wx.navigateTo({
+        url: '../createTask/createTask',
+        success: function () {
+            console.log('success')
+        },
+        fail: function () {
+            console.log('fail')
+        },
+        complete: function () {
+
+        }
+    })
+  },
   goCreateTask:function() {
     console.log('goCreateTask')
     wx.navigateTo({
-      url: '../createTask/createTask',
-      success:function() {
-        console.log('success')
-      },
-      fail:function() {
-        console.log('fail')
-      },
-      complete:function() {
+        url: '../createTask/createTask',
+        success:function() {
+            console.log('success')
+        },
+        fail:function() {
+            console.log('fail')
+        },
+        complete:function() {
 
-      }
+        }
     })
   },
   goMyInfo:function() {
     wx.navigateTo({
-      url: '../myInfo/myInfo',
-      success:function() {
+        url: '../myInfo/myInfo',
+        success:function() {
 
-      },
-      fail:function() {
+        },
+        fail:function() {
 
-      },
-      complete:function() {
+        },
+        complete:function() {
 
-      }
+        }
     })
   }
 })

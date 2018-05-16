@@ -1,3 +1,4 @@
+const app = getApp();
 Page({
     data: {
         file: null
@@ -39,6 +40,30 @@ Page({
                     url: '../response/response_fail'
                 });
             }
+        })
+    },
+    formSubmit: function(e){
+        var values = e.detail.value,
+            that = this;
+        var form = {
+            id: app.globalData.userInfo["openid"],
+            name: values["name"],
+            school: values["school"],
+            schoolId: values["schoolId"],
+        }
+        app.reqToServer("verify/", "POST", form, (res)=>{
+            var file = that.data.file;
+            app.uploadToServer("uploadImg", file, "img", null, (res)=>{
+                wx.navigateTo({
+                    url: '../response/response_success'
+                })
+            },
+            (res)=>{
+                wx.navigateTo({
+                    url: '../response/response_fail'
+                })
+            }
+            )
         })
     }
 });
