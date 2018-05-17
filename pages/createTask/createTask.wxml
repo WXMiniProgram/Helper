@@ -1,68 +1,100 @@
 <!--pages/createTask/createTask.wxml-->
-  <form bindsubmit='formSubmit' class='create-form'>
-    <view class='form-container'>
-      <view class='form-item'>
-        <label class='form-item-label' space='ensp'>标题：</label>
-        <input class='form-item-input' name='form-title-input' placeholder='简洁明了的叙述求助内容'></input>
-      </view>
 
-      <view class='form-item form-item-inline'>
-        <label class='form-item-label item-inline-label'>任务类型：</label>
-        <picker class="item-inline-input" bindchange="bindTypeChange" value="{{typeIndex}}" range="{{typeArray}}">
-          <view class="picker-view">
-            {{defaultPick}}
-          </view>
-        </picker>
-      </view>
-
-      <view class='form-item form-item-inline'>
-         <label class='form-item-label item-inline-label' space="ensp">赏金(元) ：</label>
-         <picker class="item-inline-input" bindchange="bindBountyChange" range="{{bountyArray}}">
-            <view class="picker-view">
-            {{defaultPick}}
+<form bindsubmit='formSubmit' class='page'>
+    <view class='page__bd'>
+        <view class="weui-cells__title">标题（必填）：</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="简洁的叙述求助内容" bindconfirm="setTitle" disabled="{{!canModify}}" value="{{title}}" name="title"/>
+                </view>
             </view>
-         </picker>
-         <!--<picker class=''></picker>-->
-      </view>
+        </view>
 
-      <view class='form-item form-item-inline'>
-        <label class='form-item-label item-inline-label' space='ensp'>截止时间：</label>
-        <picker class="item-inline-input" name="date" mode="time" value="{{date}}" start="6:10" end="13:59">
-          <view>
-            {{now}}
-          </view>
-          <!--<image class="publish-type-arrow" mode="aspectFill" src="../../images/arrow1.png" />-->
-        </picker>
-      </view>
+        <view class="weui-cells__title">详细信息：</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">奖金(元)</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker mode="selector" value="{{bountyIndex}}" range="{{bountyArray}}" bindchange="bindBountyChange" disabled='{{!canModify}}'>
+                        <view class="weui-input">{{bountyArray[bountyIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">截止日期</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange" disabled='{{!canModify}}'>
+                        <view class="weui-input">{{date}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">截止时间</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange" disabled='{{!canModify}}'>
+                        <view class="weui-input">{{time}}</view>
+                    </picker>
+                </view>
+            </view>
+        </view>
+        <view class="weui-cells__title">任务地点：</view>
+        <view class="weui-cells weui-cells_after-title">
+            <navigator bindtap='chooseLocation' class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view id="location" class="weui-cell__bd">{{location.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+        </view>
 
-      <view class='form-item'>
-        <label class='form-item-label' space='ensp'>任务地点：</label>
-        <textarea class="form-item-input" row="2" placeholder='告诉对方到哪里帮你~'></textarea>
-      </view>
-
-      <view class='form-item'>
-        <label class='form-item-label' space='ensp'>详细描述：</label>
-        <textarea id="task-detail" class='form-item-input' name="describe" row="4" col="10" placeholder="\不要在此处写类似“快递箱密码”等私密信息"/>
-      </view>
-      <view class='form-item form-item-inline'>
-        <label class='form-item-label item-inline-label' space='ensp'>隐藏信息：</label>
-        <switch id='toggle-switch' class='item-inline-input' bindchange='bindSwitchChange'></switch>
-      </view>
-      <view wx:if="{{hasPrivate}}" class='form-item'>
-        <textarea  id="task-detail" class='form-item-input' name="describe" row="3" col="10" placeholder="快递箱密码等私密信息（仅能被领取者看到）"/>
-      </view>
-      <view class='form-item form-item-inline'>
-        <label class='item-inline-label' space='ensp'>发 布 人：</label>
-        <rich-text nodes="{{publisher}}" class='item-inline-input'>{{username}}</rich-text>
-      </view>
-      <view class='form-item form-item-inline'>
-        <label class='item-inline-label' space='ensp'>领 取 人：</label>
-        <rich-text nodes="{{hunter}}" class='item-inline-input'></rich-text>
-      </view>
-      <view class='form-item'>
-        <button class='form-create-button' plain="true" form-type='submit' type="primary">确定</button>
-        <button class='form-create-button' plain="true" type="warn">撤回任务</button>
-      </view>
+        <view class="weui-cells__title">任务详情</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="此详情为公开信息，请不要在此填入类似 快递箱密码 等重要信息（如有，请开启 '使用隐藏信息' 中）" bindconfirm="setDescription" disabled='{{!canModify}}' value="{{description}}" name="desc" style="height: 4em" />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">使用隐藏信息</view>
+                <view class="weui-cell__ft">
+                    <switch bindchange='bindSwitchChange' disabled='{{!canModify}}'/>
+                </view>
+            </view>
+            <view wx:if="{{hasPrivate}}" class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="快递箱密码、手机号等私密信息（仅可被领取者看到）" style="height: 4em" bindconfirm="setHiddenMsg" value="{{hiddenMsg}}" name="hiddenMsg" disabled='{{!canModify}}'/>
+                </view>
+            </view>
+        </view>
+        <view class="weui-cells__title"></view>
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="../myinfo/myinfo?id={{publisher.id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                    <image src="{{publisher.avatar}}" class='avatar-sm avatar-circle'></image>
+                </view>
+                <view class="weui-cell__bd">发布人</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{publisher.username}}</view>
+            </navigator>
+            <navigator url="../myinfo/myinfo?id={{publisher.id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                    <image src="{{hunter.avatar}}" class='avatar-sm avatar-circle'></image>
+                </view>
+                <view class="weui-cell__bd"> 领取人</view>
+                <view wx:if="{{hunter == null}}" class="weui-cell__ft weui-cell__ft_in-access">待领取</view>
+                <view wx:else class="weui-cell__ft weui-cell__ft_in-access">{{hunter.username}}</view>
+            </navigator>
+        </view>
+        <button wx:if="{{isPublisher && status == 0}}" formType="submit" bindtap="submit" class="weui-btn" type="primary">发布</button>
+        <button wx:elif="{{isPublisher && (status == 1 || status == 2 || status == 3)}}" bindtap='submit' class="weui-btn" type="primary">更新</button>
+        <button wx:elif="{{!isPublisher && status == 1}}" bindtap='get' class="weui-btn" type="primary">领取</button>
+        <button wx:elif="{{!isPublisher && status > 1}}" disabled='true' class="weui-btn" type="primary">已领取</button>
+        <button wx:if="{{isPublisher && status > 0 && status < 4}}" bindtap="cancel" class="weui-btn" type="warn">取消任务</button>
+        <button wx:if="{{isPublisher && status == 4}}" bindtap="cancel" class="weui-btn" type="warn">从记录中删除</button>
     </view>
-  </form>
+</form>
 

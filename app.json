@@ -1,11 +1,18 @@
 {
   "pages":[
-    "pages/myInfo/myInfo",
-    "pages/createTask/createTask",
-    "pages/homePage/homePage",
-    "pages/taskDetail/taskDetail",
-    "pages/myTaskCreated/myTaskCreated",
-    "pages/myTaskGetting/myTaskGetting"
+      "pages/uploadImg/uploadImg",
+      "pages/createTask/createTask",
+      "pages/checkList/checkList",
+      "pages/myInfo/myInfo",
+      "pages/homePage/homePage",
+    
+    
+    
+    
+    
+    "pages/response/response_success",
+    "pages/response/response_fail"
+    
   ],
   "window":{
     "backgroundTextStyle":"light",

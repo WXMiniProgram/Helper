@@ -11,22 +11,15 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  border-bottom:1px solid #999;
+  background-color: #efeff4;
 }
 
 .homepage-top-left{
-  width:50%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  border-right: 1px solid #999;
+  flex-grow: 1;
 }
 
 .homepage-top-right{
-  width:50%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-grow: 2;
 }
 
 .picker-view{
@@ -94,4 +87,21 @@
 
 .homepage-create-icon{
   font-size: 45px;
+}
+
+.weui-search-bar {
+    padding: 2px 3px;
+    border-top: 0;
+    border-bottom: 0
+}
+
+.weui-panel {
+    margin-top: 20rpx;
+}
+
+.right-tag {
+    font-size: 18px;
+    color: greenyellow;
+    float: right;
+    margin-right: 20rpx;
 }

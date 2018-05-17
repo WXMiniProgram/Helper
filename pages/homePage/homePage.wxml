@@ -1,6 +1,70 @@
 <!--homePage.wxml-->
-<view class="homepage-container">
-  <view class="homepage-top">
+<view class="page">
+    <view class='page__bd'>
+        <view class="homepage-top">
+            <picker class='homepage-top-left' bindchange="bindSortChange" mode="selector" value='{{sortIndex}}' range="{{sortArray}}">
+                <view class="picker-view">
+                    <view class='homepage-top-icon iconfont icon-order'></view>
+                    {{sortArray[sortIndex]}}
+                </view>
+            </picker>
+            <view class="weui-search-bar homepage-top-right">
+                <view class="weui-search-bar__form">
+                    <view class="weui-search-bar__box">
+                        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                        <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                        <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                            <icon type="clear" size="14"></icon>
+                        </view>
+                    </view>
+                    <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                        <icon class="weui-icon-search" type="search" size="14"></icon>
+                        <view class="weui-search-bar__text">搜索</view>
+                    </label>
+                </view>
+                <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+            </view>
+        </view>
+        <view wx:for="{{taskArray}}"  class="weui-panel">
+            <view bindtap='goTaskDetail'>
+                <view class="weui-panel__hd">
+                    <image src='../../images/bg01.jpg' class='avatar-sm avatar-circle'></image> 
+                    {{item.userId}}
+                    <label class="right-tag">100 m</label>
+                </view>
+                <view class="weui-panel__bd">
+                    <view class="weui-media-box weui-media-box_text">
+                        <view class="weui-media-box__title weui-media-box__title_in-text">{{item.srvTitle}}</view>
+                        <view class="weui-media-box__desc">{{item.srvDesc}}</view>
+                        <view class="weui-media-box__info">
+                            <view class="weui-media-box__info__meta">赏金：{{item.srvCost}} 元</view>
+                            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">  {{item.srvTime}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="homepage-bottom">
+            <view class="homepage-bottom-left-right">
+            <button class="circle-button" type="default" size="default">
+                <view class='iconfont icon-form homepage-bottom-icon'></view>
+            </button>
+            </view>
+            <view class="homepage-bottom-center">
+            <button class="circle-button create-button" bindtap="goCreateTask" type="default" size="default" style='background-color: yellow'>
+                <view class='iconfont icon-add homepage-create-icon'></view>
+            </button>
+            </view>
+            <view class="homepage-bottom-left-right">
+            <button class="circle-button" bindtap='goMyInfo' type="default" size="default">
+                <view class='iconfont icon-people homepage-bottom-icon'></view>
+            </button>
+            </view>
+        </view>
+
+    </view>
+  <!--<view class="homepage-top">
     <picker class="homepage-top-left" bindchange="bindSortChange" value="{{sortIndex}}" range="{{sortArray}}">
       <view class="picker-view">
         <view class='homepage-top-icon iconfont icon-order'></view>
@@ -41,5 +105,5 @@
         <view class='iconfont icon-people homepage-bottom-icon'></view>
       </button>
     </view>
-  </view>
+  </view>-->
 </view>

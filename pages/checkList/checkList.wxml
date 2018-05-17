@@ -1,0 +1,35 @@
+<view class="page">
+    <view class="page__bd">
+
+        <view wx:for="{{cardArray}}" wx:for-index="index" class="weui-form-preview">
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">用户名</view>
+                    <view class="weui-form-preview__value_in-hd">{{item.username}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">姓名</view>
+                    <view class="weui-form-preview__value">{{item.name}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">学校</view>
+                    <view class="weui-form-preview__value">{{item.school}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">学号</view>
+                    <view class="weui-form-preview__value">{{item.schoolId}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <image src="{{item.src}}" bindtap='bindImageTap' data-current="{{item.src}}" mode="widthFix"></image>
+                </view>
+            </view>
+            <view class="weui-form-preview__ft">
+                <navigator bindtap="bindRejectTap" data-current="{{index}}" class="weui-form-preview__btn weui-form-preview__btn_warn" hover-class="weui-form-preview__btn_active">驳回</navigator>
+                <navigator bindtap="bindPassTap" data-current="{{index}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">通过</navigator>
+            </view>
+        </view>
+        
+    </view>
+</view>
