@@ -40,7 +40,7 @@
 
     <view class="weui-cells__title">身份验证</view>
     <view class="weui-cells weui-cells_after-title">
-        <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <navigator url='../uploadImg/uploadImg' class="weui-cell weui-cell_access" hover-class="weui-cell_active">
             <view wx:if="{{verify_status == 0}}" class="weui-cell__bd">
                 <icon type="warn" size="20" color="#FFBE00"></icon> 未验证
             </view>

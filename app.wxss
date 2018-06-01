@@ -17,7 +17,7 @@
     font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
 }
 .page__hd {
-    padding: 40px;
+    padding: 35rpx;
 }
 .page__bd {
     padding-bottom: 40px;

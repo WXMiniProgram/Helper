@@ -5,22 +5,32 @@ App({
         var logs = wx.getStorageSync('logs') || []
         var that = this;
         logs.unshift(Date.now())
-        wx.setStorageSync('logs', logs)
-
+        wx.setStorageSync('logs', logs);
+        that.globalData.userInfo = wx.getStorageSync("userInfo");
         // 登录
-        wx.login({
-            success: res => {
-                that.reqToServer("http://127.0.0.1:3000/login/"+res.code, "GET", null, (res)=>{
-                    that.globalData.userinfo = res.user;
-                });
-                // 发送 res.code 到后台换取 openId, sessionKey, unionId
-            }
-        })
+        if(!that.globalData.userInfo){
+        //if(true){
+            wx.login({
+                success: res => {
+                    that.reqToServer("user/login/" + res.code, "GET", null, (res) => {
+                        let data = res["data"]["result"];
+                        console.log("userData", data);
+                        wx.setStorage({
+                            key: 'userInfo',
+                            data: data,
+                        })
+                        that.globalData.userinfo = res.data;
+                    });
+                }
+            })
+        }
     },
     globalData: {
-        userInfo: null
+        userInfo: null,
+        server: "https://abc.yhmeng.top/"
         /*
         {
+            _id: unique,
             openid: unique,
             username:String
             avatar:url String
@@ -32,11 +42,12 @@ App({
     // 　　const app = getApp()    其他文件 加这句就可以使用app.js里的内容 如app.toServer
     
     reqToServer: function(url, method="GET", formData=null, succfunc=function(){}, errfunc=function(){}){
+        var that = this;
         wx.request({
-            url: url,
+            url: that.globalData.server + url,
             method: method.toUpperCase(), // 必须为大写
             data: formData,
-            //dataType: "json",
+            // dataType: "json",
             header: {
                 'content-type': 'application/json' // 默认值
             },
@@ -58,7 +69,7 @@ App({
         wx.showModal({
             title: title,
             content: content,
-            confirmText: confitmText,
+            confirmText: confirmText,
             cancelText: cancelText,
             success: func
             /*success: function (res) {

@@ -20,48 +20,59 @@ Page({
         status: 0, // 0：新任务 1：待领取 2：已领取 3：进行中 4：已完成
         isPublisher: true, // 临时加的 判断是不是当前用户创建的这个任务
         canModify: true,
-        publisher:null,
-        /*
-            {
-                id: openid,
-                username:
-                avatar:
-            }
-         */
-        hunter:null
+        publisher: {
+            "openid": null,
+            "username": null,
+            "avatar": null,
+        },
+        hunter: {
+            "openid": null,
+            "username": null,
+            "avatar": null,
+        }
     },
     onLoad: function (options) {
-        var params = null;
         var that = this;
-        if (options.params) {
-            params = JSON.parse(options.params);
-            var publisher = params["publisher"];
-            that.setData({
-                title: params["title"],
-                bountyIndex: params["bounty"],
-                date: params["date"],
-                time: params["time"],
-                location: params["location"],
-                description: params["bounty"],
-                // hiddenMsg 要传吗？？在HTTP层能拿到
-                hasPrivate: params["private"] != null,
-                status: params["status"],
-                isPublisher: params["publisher"]["id"] == app.globalData.userinfo.id,
-                // 发布者，且任务未结束的时候才能修改
-                canModify: params["publisher"]["id"] == app.globalData.userinfo.id && params["status"] <= 3,
-                publisher: params["publisher"],
-                hunter: params["hunter"]
+        console.log("option", options);
+        if (options["query"]) {
+            let params = JSON.parse(options.query);
+            let task_id = params["task_id"];
+            app.reqToServer('task/'+task_id, "GET", null, (detail)=>{
+                let publisher = detail["publisher"];
+                that.setData({
+                    title: detail["title"],
+                    bountyIndex: detail["bounty"],
+                    date: detail["date"],
+                    time: detail["time"],
+                    location: detail["location"],
+                    description: detail["description"],
+                    // hiddenMsg 要传吗？？在HTTP层能拿到
+                    hasPrivate: detail["private"] != null,
+                    status: detail["status"],
+                    isPublisher: publisher["id"] == app.globalData.userinfo.id,
+                    // 发布者，且任务未结束的时候才能修改
+                    canModify: publisher["id"] == app.globalData.userinfo.id && detail["status"] <= 3,
+                    publisher: params["publisher"],
+                    hunter: params["hunter"]
+                })
             })
+            let publisher = params["publisher"];
         } else {
+            let publisher = app.globalData.userInfo;
+            console.log("publisher", publisher);
             that.setData({
-                publisher: app.globalData.userInfo
-            })
+                publisher: {
+                    "openid": publisher["openid"],
+                    "username": publisher["username"],
+                    "avatar": publisher["avatar"]
+                }
+            });
         }
     },
     formSubmit: function(e) {
-        console.log("--------------------------------")
         var values = e.detail.value,
             that = this;
+        console.log("values", values);
         var form = {
             title: values.title,
             bounty: that.data.bountyArray[that.data.bountyIndex],
@@ -70,21 +81,26 @@ Page({
             location: that.data.location,
             description: values.desc,
             hiddenMsg: values.hiddenMsg,
-            publisher: that.data.publisher,
-            hunter: that.data.hunter
+            publisher: that.data.publisher.openid,
+            hunter: that.data.hunter.openid
         }
         console.log(form);
-        app.reqToServer('tasks/', "POST", form, (res)=>{
-            app.openConfirm("确认发布？", "任务完成前仍可随时更改", "发送", "取消", (e)=>{
-                if(res.confirm){
-                    app.openToast("发布成功");
-                    wx.redirectTo({
-                        url: "../homePage/homePage"
-                    })
-                }
-            });
-            
-        })
+        app.openConfirm("确认发布？", "任务完成前仍可随时更改", "发送", "取消", (e) => {
+            if(e.confirm){
+                app.reqToServer('tasks/', "POST", form, (res) => {
+                    console.log(res)
+                    if(res["statusCode"] == 200){
+                        console.log(res);
+                        app.openToast("发布成功");
+                        wx.reLaunch({
+                            url: "../homePage/homePage"
+                        });
+                    }else{
+                        app.openToast("表单不完整")
+                    }
+                })
+            }
+        });
     },
     bindSwitchChange: function(e) {
         var that = this;
