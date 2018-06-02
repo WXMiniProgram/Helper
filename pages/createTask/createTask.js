@@ -32,42 +32,44 @@ Page({
         }
     },
     onLoad: function (options) {
-        var that = this;
-        if (options["query"]) {
-            let params = JSON.parse(options.query);
-            let task_id = params["task_id"];
-            app.reqToServer('task/'+task_id, "GET", null, (detail)=>{
-                let publisher = detail["publisher"];
-                that.setData({
-                    title: detail["title"],
-                    bountyIndex: detail["bounty"],
-                    date: detail["date"],
-                    time: detail["time"],
-                    location: detail["location"],
-                    description: detail["description"],
-                    // hiddenMsg 要传吗？？在HTTP层能拿到
-                    hasPrivate: detail["private"] != null,
-                    status: detail["status"],
-                    isPublisher: publisher["id"] == app.globalData.userinfo.id,
-                    // 发布者，且任务未结束的时候才能修改
-                    canModify: publisher["id"] == app.globalData.userinfo.id && detail["status"] <= 3,
-                    publisher: params["publisher"],
-                    hunter: params["hunter"]
+        app.checkVerify(()=>{
+            var that = this;
+            if (options["query"]) { // 查看详情
+                let params = JSON.parse(options.query);
+                let task_id = params["task_id"];
+                app.reqToServer('task/' + task_id, "GET", null, (detail) => { // 用传来的task_id申请获取任务详情
+                    let publisher = detail["publisher"];
+                    that.setData({
+                        title: detail["title"],
+                        bountyIndex: detail["bounty"],
+                        date: detail["date"],
+                        time: detail["time"],
+                        location: detail["location"],
+                        description: detail["description"],
+                        // hiddenMsg 要传吗？？在HTTP层能拿到
+                        hasPrivate: detail["private"] != null,
+                        status: detail["status"],
+                        isPublisher: publisher["id"] == app.globalData.userinfo.id,
+                        // 发布者，且任务未结束的时候才能修改
+                        canModify: publisher["id"] == app.globalData.userinfo.id && detail["status"] <= 3,
+                        publisher: params["publisher"],
+                        hunter: params["hunter"]
+                    })
                 })
-            })
-            let publisher = params["publisher"];
-        } else {
-            let publisher = app.globalData.userInfo;
-            that.setData({
-                publisher: {
-                    "openid": publisher["openid"],
-                    "username": publisher["username"],
-                    "avatar": publisher["avatar"]
-                },
-                canModify: true,
-                isPublisher: true
-            });
-        }
+                let publisher = params["publisher"];
+            } else {
+                let publisher = app.globalData.userInfo;
+                that.setData({
+                    publisher: {
+                        "openid": publisher["openid"],
+                        "username": publisher["username"],
+                        "avatar": publisher["avatar"]
+                    },
+                    canModify: true,
+                    isPublisher: true
+                });
+            }
+        });
     },
     formSubmit: function(e) {
         var values = e.detail.value,

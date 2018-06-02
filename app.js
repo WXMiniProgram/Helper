@@ -40,7 +40,24 @@ App({
          */
     },
     // 　　const app = getApp()    其他文件 加这句就可以使用app.js里的内容 如app.toServer
-    
+    checkVerify(func){
+        if(true){
+        //if (this.globalData.userInfo.verify){
+            func();
+        }else{
+            this.openConfirm("未认证", "通过认证后方可继续", "去认证", "取消", (res)=>{
+                if(res.confirm){
+                    wx.navigateTo({
+                        url: '../uploadImg/uploadImg',
+                    })
+                }else{
+                    wx.navigateBack({
+                        delta: 1
+                    })
+                }
+            })
+        }
+    },
     reqToServer: function(url, method="GET", formData=null, succfunc=function(){}, errfunc=function(){}){
         var that = this;
         wx.request({

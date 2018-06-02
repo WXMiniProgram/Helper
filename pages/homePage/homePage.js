@@ -61,7 +61,6 @@ Page({
         })
     },
     goCreateTask:function() {
-        console.log('goCreateTask')
         wx.navigateTo({
             url: '../createTask/createTask',
             success:function() {
@@ -78,15 +77,6 @@ Page({
     goMyInfo:function() {
         wx.navigateTo({
             url: '../myInfo/myInfo',
-            success:function() {
-
-            },
-            fail:function() {
-
-            },
-            complete:function() {
-
-            }
         })
     },
     onLoad: function(options) {
@@ -94,7 +84,6 @@ Page({
         var that = this;
         // console.log(Object.prototype.toString.call(options));
         if (options.mode == undefined || options.user == undefined) {
-            console.log("无传入值，homePage页面，获取所有taskList");
             app.reqToServer("tasks", "GET", null, (data) => {
                 var task_list = data["data"]["result"];
                 console.log("tasks:", task_list);
@@ -103,7 +92,6 @@ Page({
                 })
             })
         } else {
-            console.log("options=", options);
             console.log("tasks/" + options.mode + "/" + options.user);
             app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
                 var task_list = data["data"]["result"]
