@@ -66,6 +66,8 @@ Page({
                 url: '../response/response_fail'
             });
         })
-        app.reqToServer("user/verify/"+openid, "POST", form, ()=>{}, ()=>{})
+        app.reqToServer("user/verify/"+openid, "POST", form, (res)=>{
+          console.log("verify responsee", res);
+        }, ()=>{})
     }
 });
