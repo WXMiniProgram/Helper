@@ -73,7 +73,7 @@
         </view>
         <view class="weui-cells__title"></view>
         <view class="weui-cells weui-cells_after-title">
-            <navigator url="../myinfo/myinfo?id={{publisher.openid}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <navigator url="../myinfo/myinfo" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__hd">
                     <image src="{{publisher.avatar}}" class='avatar-sm avatar-circle'></image>
                 </view>

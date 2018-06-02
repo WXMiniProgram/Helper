@@ -7,6 +7,7 @@ Page({
     },
     chooseImg: function (detail) {
         let userInfo = detail["detail"]["userInfo"];
+        let that = this;
         this.setData({
             nickname: userInfo["nickName"],
             avatarURL: userInfo["avatarUrl"]
@@ -22,7 +23,7 @@ Page({
             }
         })
     },
-    uploadImg: function(){
+   /* uploadImg: function(){
         let that = this;
         wx.uploadFile({
             url: 'https://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
@@ -47,25 +48,45 @@ Page({
                 });
             }
         })
-    },
+    },*/
     formSubmit: function(detail){
         let values = detail["detail"]["value"];
         let that = this;
         let openid = app.globalData.userInfo["openid"];
         var form = {
-            id: openid,
+            openid: openid,
             name: values["name"],
             school: values["school"],
             schoolId: values["schoolId"],
+            avatar: that.data.avatarURL,
+            username: that.data.nickname
         }
-        app.uploadToServer("user/uploadImg/" + openid, that.data.file, "img", (res)=>{},(err)=>{
+        app.uploadToServer("user/uploadImg/" + openid, that.data.file, "img", null, (res)=>{
+            let result = res.data.result;
+        },(err)=>{
             that.setData({
-                file: null
+                file: null,
+                userInfo: result
             });
-            wx.navigateTo({
+            wx.reLaunch({
                 url: '../response/response_fail'
             });
         })
-        app.reqToServer("user/verify/"+openid, "POST", form, ()=>{}, ()=>{})
+        app.reqToServer("user/verify/"+openid, "POST", form, (res)=>{
+            let result = res.data.result;
+            wx.setStorage({
+                key: 'userInfo',
+                data: result,
+            })
+            app.globalData.userInfo = result;
+            that.setData({
+                userInfo: result
+            })
+            console.log(app.globalData.userInfo);
+            wx.navigateTo({
+                url: '../response/response_success?title="上传成功"&content="请耐心等待审核"',
+                
+            })
+        }, ()=>{})
     }
 });

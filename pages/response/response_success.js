@@ -9,6 +9,7 @@ Page({
         content: "",
     },
     onLoad: function(options){
+        console.log(options);
         var params = options.params,
             that = this;
         that.setData({

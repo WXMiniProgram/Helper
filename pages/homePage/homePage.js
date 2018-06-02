@@ -94,6 +94,7 @@ Page({
         var that = this;
         app.reqToServer("tasks", "GET", null, (data)=>{
             var task_list = data["data"]["result"]
+            console.log("tasks:", task_list);
             that.setData({
                 taskArray: task_list
             })

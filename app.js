@@ -7,7 +7,7 @@ App({
         logs.unshift(Date.now())
         wx.setStorageSync('logs', logs);
         that.globalData.userInfo = wx.getStorageSync("userInfo");
-        // 登录
+        // 登录\
         if(!that.globalData.userInfo){
         //if(true){
             wx.login({
@@ -56,8 +56,9 @@ App({
         })
     },
     uploadToServer: function(url, filePath, fileKey, formData, succfunc, errfunc){
+        let that = this;
         wx.uploadFile({
-            url: url,
+            url: that.globalData.server + url,
             filePath: filePath,
             name: fileKey,
             formData: formData,

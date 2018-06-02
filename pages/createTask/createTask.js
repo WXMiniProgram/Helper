@@ -33,7 +33,6 @@ Page({
     },
     onLoad: function (options) {
         var that = this;
-        console.log("option", options);
         if (options["query"]) {
             let params = JSON.parse(options.query);
             let task_id = params["task_id"];
@@ -59,13 +58,14 @@ Page({
             let publisher = params["publisher"];
         } else {
             let publisher = app.globalData.userInfo;
-            console.log("publisher", publisher);
             that.setData({
                 publisher: {
                     "openid": publisher["openid"],
                     "username": publisher["username"],
                     "avatar": publisher["avatar"]
-                }
+                },
+                canModify: true,
+                isPublisher: true
             });
         }
     },
@@ -74,23 +74,25 @@ Page({
             that = this;
         console.log("values", values);
         var form = {
-            title: values.title,
+            caption: values.title,
             bounty: that.data.bountyArray[that.data.bountyIndex],
             date: that.data.date,
             time: that.data.time,
-            location: that.data.location,
+            taskloc: that.data.location,
             description: values.desc,
             hiddenMsg: values.hiddenMsg,
-            publisher: that.data.publisher.openid,
-            hunter: that.data.hunter.openid
+            publisher:{
+                publisher_id: that.data.publisher.openid,
+                publisher_username: that.data.publisher.username,
+                publisher_avatar: that.data.publisher.avatar,  
+            },
+            hunter: null
         }
-        console.log(form);
         app.openConfirm("确认发布？", "任务完成前仍可随时更改", "发送", "取消", (e) => {
             if(e.confirm){
                 app.reqToServer('tasks/', "POST", form, (res) => {
-                    console.log(res)
+                    console.log("submit response", res);
                     if(res["statusCode"] == 200){
-                        console.log(res);
                         app.openToast("发布成功");
                         wx.reLaunch({
                             url: "../homePage/homePage"
