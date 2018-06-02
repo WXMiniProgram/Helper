@@ -18,25 +18,20 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-        if(app.globalData.userInfo) {
+    onLoad: function () {
+      if(app.globalData.userInfo) {
         this.setData({
             userInfo: app.globalData.userInfo,
         })
-        } else {
-        wx.getUserInfo({
-            success:res => {
-            app.globalData.userInfo = res.userInfo
-            this.setData({
-                userInfo: res.userInfo,
-            })
-            }
-        })
+      } else {
+        // TODO:
         }
+        console.log("getUserInfo", this.data.userInfo);
+        // console.log(score);
     },
 
     getUserInfo: function(e) {
-        console.log(e)
+        console.log("getUserInfo", e)
         app.globalData.userInfo = e.detail.userInfo
         this.setData({
         userInfo: e.detail.userInfo,
