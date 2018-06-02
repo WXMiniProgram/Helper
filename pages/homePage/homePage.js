@@ -94,23 +94,23 @@ Page({
         var that = this;
         // console.log(Object.prototype.toString.call(options));
         if (options.mode == undefined || options.user == undefined) {
-          console.log("无传入值，homePage页面，获取所有taskList");
-          app.reqToServer("tasks", "GET", null, (data) => {
-            var task_list = data["data"]["result"]
-            console.log("tasks:", task_list);
-            that.setData({
-              taskArray: task_list
+            console.log("无传入值，homePage页面，获取所有taskList");
+            app.reqToServer("tasks", "GET", null, (data) => {
+                var task_list = data["data"]["result"];
+                console.log("tasks:", task_list);
+                that.setData({
+                    taskArray: task_list
+                })
             })
-          })
         } else {
-          console.log("options=", options);
-          console.log("tasks/" + options.mode + "/" + options.user);
-          app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
-            var task_list = data["data"]["result"]
-            that.setData({
-              taskArray: task_list
+            console.log("options=", options);
+            console.log("tasks/" + options.mode + "/" + options.user);
+            app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
+                var task_list = data["data"]["result"]
+                that.setData({
+                taskArray: task_list
+                })
             })
-          })
         }
         // thst.setData 
     }

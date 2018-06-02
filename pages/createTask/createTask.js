@@ -82,7 +82,7 @@ Page({
             description: values.desc,
             hiddenMsg: values.hiddenMsg,
             publisher:{
-                publisher_id: that.data.publisher.openid,
+                publisher_openid: that.data.publisher.openid,
                 publisher_username: that.data.publisher.username,
                 publisher_avatar: that.data.publisher.avatar,  
             },

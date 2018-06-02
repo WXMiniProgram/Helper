@@ -8,8 +8,8 @@ App({
         wx.setStorageSync('logs', logs);
         that.globalData.userInfo = wx.getStorageSync("userInfo");
         // 登录\
-        if(!that.globalData.userInfo){
-        //if(true){
+        //if(!that.globalData.userInfo){
+        if(true){
             wx.login({
                 success: res => {
                     that.reqToServer("user/login/" + res.code, "GET", null, (res) => {
