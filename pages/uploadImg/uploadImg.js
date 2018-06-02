@@ -1,10 +1,16 @@
 const app = getApp();
 Page({
     data: {
-        file: null
+        file: null,
+        avatarURL: "",
+        nickname: ""
     },
-    chooseImg: function (e) {
-        var that = this;
+    chooseImg: function (detail) {
+        let userInfo = detail["detail"]["userInfo"];
+        this.setData({
+            nickname: userInfo["nickName"],
+            avatarURL: userInfo["avatarUrl"]
+        })
         wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -17,7 +23,7 @@ Page({
         })
     },
     uploadImg: function(){
-        var that = this;
+        let that = this;
         wx.uploadFile({
             url: 'https://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
             filePath: that.data.file,
@@ -42,28 +48,24 @@ Page({
             }
         })
     },
-    formSubmit: function(e){
-        var values = e.detail.value,
-            that = this;
+    formSubmit: function(detail){
+        let values = detail["detail"]["value"];
+        let that = this;
+        let openid = app.globalData.userInfo["openid"];
         var form = {
-            id: app.globalData.userInfo["openid"],
+            id: openid,
             name: values["name"],
             school: values["school"],
             schoolId: values["schoolId"],
         }
-        app.reqToServer("verify/", "POST", form, (res)=>{
-            var file = that.data.file;
-            app.uploadToServer("uploadImg", file, "img", null, (res)=>{
-                wx.navigateTo({
-                    url: '../response/response_success'
-                })
-            },
-            (res)=>{
-                wx.navigateTo({
-                    url: '../response/response_fail'
-                })
-            }
-            )
+        app.uploadToServer("user/uploadImg/" + openid, that.data.file, "img", (res)=>{},(err)=>{
+            that.setData({
+                file: null
+            });
+            wx.navigateTo({
+                url: '../response/response_fail'
+            });
         })
+        app.reqToServer("user/verify/"+openid, "POST", form, ()=>{}, ()=>{})
     }
 });
