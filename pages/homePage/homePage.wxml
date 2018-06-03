@@ -46,17 +46,12 @@
         </view>
 
         <view class="homepage-bottom">
-            <view class="homepage-bottom-left-right">
-            <button class="circle-button" type="default" size="default">
-                <view class='iconfont icon-form homepage-bottom-icon'></view>
-            </button>
-            </view>
             <view class="homepage-bottom-center">
             <button class="circle-button create-button" bindtap="goCreateTask" type="default" size="default" style='background-color: yellow'>
                 <view class='iconfont icon-add homepage-create-icon'></view>
             </button>
             </view>
-            <view class="homepage-bottom-left-right">
+            <view class="homepage-bottom-right">
             <button class="circle-button" bindtap='goMyInfo' type="default" size="default">
                 <view class='iconfont icon-people homepage-bottom-icon'></view>
             </button>
