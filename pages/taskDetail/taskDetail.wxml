@@ -93,7 +93,8 @@
         <button wx:if="{{status==-1}}" class="weui-btn" type="warn" disabled='true'>任务已取消</button>
         <button wx:if="{{!canModify && status ==0}}" bindtap='getTask' class="weui-btn" type="primary">领取</button>
         <button wx:elif="{{!canModify && status > 1}}" disabled='true' class="weui-btn" type="primary">已领取</button>
-        <button wx:if="{{canmodify && status >=0 && status < 4}}" bindtap="complete" class="weui-btn" type="primary">标记为已完成</button>
         <button wx:if="{{canModify && status >= 0 && status < 4}}" bindtap="cancel" class="weui-btn" type="warn">取消任务</button>
+        <button wx:if="{{canModify && status >=0 && status < 4}}" bindtap="complete" class="weui-btn" type="primary">标记为完成</button>
+        
     </view>
 </form>
