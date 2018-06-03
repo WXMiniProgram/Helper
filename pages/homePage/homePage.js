@@ -4,6 +4,7 @@ const app = getApp()
 
 Page({
     data: {
+        isMyInfo: false,
         location: {},
         sortIndex: 0,
         sortArray: ['距离', '赏金', '时间'],
@@ -121,6 +122,9 @@ Page({
         }
         if (options.mode == undefined || options.user == undefined) {
             console.log("无传入值，homePage页面，获取所有taskList");
+            that.setData({
+                isMyInfo: false
+            })
             app.reqToServer("tasks", "GET", null, (data) => {
                 var task_list = data["data"]["result"];
                 console.log("tasks:", task_list);
@@ -140,6 +144,17 @@ Page({
                 });
                 that.taskSort();
                 console.log("taskArray", that.data.taskArray);
+            })
+        } else {
+            console.log("options=", options);
+            that.setData({
+                isMyInfo: true
+            })
+            app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
+                var task_list = data["data"]["result"]
+                that.setData({
+                    taskArray: task_list
+                })
             })
         }
     },
