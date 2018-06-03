@@ -103,7 +103,7 @@ Page({
             console.log("排序后taskArray", this.data.taskArray);
         } else {
             console.log("按时间排序");
-            
+
         }
         this.setData({
             taskArray: this.data.taskArray
@@ -138,10 +138,10 @@ Page({
                 that.setData({
                     taskArray: task_list
                 });
+                that.taskSort();
                 console.log("taskArray", that.data.taskArray);
             })
         }
-        that.taskSort();
     },
     calculateDistance: function (e) {
         // la1, lo1, la2, lo2
