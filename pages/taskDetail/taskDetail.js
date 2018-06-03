@@ -56,14 +56,14 @@ Page({
                     let canAccess = false;
                     let canModify = false;
                     if(detail["status"]<=3){ // 任务未结束
-                        if (publisher["publisher_openid"] == app.globalData.userInfo.openid){ // 是发布者
+                        if (publisher["openid"] == app.globalData.userInfo.openid){ // 是发布者
                             canAccess = canModify = true;
-                        } else if (hunter && hunter["hunter_openid"] == app.globalData.userInfo.openid){
+                        } else if (hunter && hunter["openid"] == app.globalData.userInfo.openid){
                             // 是领取者
                             canAccess = true;
                         }
                     }
-                    console.log("detail:", detail, canAccess, canModify);
+                    console.log(detail["status"], canModify, canAccess);
                     that.setData({
                         id: detail["id"],
                         title: detail["caption"],
@@ -79,68 +79,9 @@ Page({
                         publisher: publisher,
                         hunter: hunter,
                     });
-                    console.log("after...", that.data);
                 })
             }
         });
-    },
-    formSubmit: function (e) {
-        var values = e.detail.value,
-            that = this;
-        console.log("values", values);
-        var form = {
-            caption: values.title,
-            bounty: that.data.bountyArray[that.data.bountyIndex],
-            date: that.data.date,
-            time: that.data.time,
-            taskloc: that.data.location,
-            description: values.desc,
-            hiddenMsg: values.hiddenMsg,
-            publisher: {
-                publisher_openid: that.data.publisher.openid,
-                publisher_username: that.data.publisher.username,
-                publisher_avatar: that.data.publisher.avatar,
-            },
-        }
-        app.openConfirm("确认发布？", "任务完成前仍可随时更改", "发送", "取消", (e) => {
-            if (e.confirm) {
-                app.reqToServer('tasks/', "POST", form, (res) => {
-                    console.log("submit response", res);
-                    if (res["statusCode"] == 200) {
-                        app.openToast("发布成功");
-                        wx.reLaunch({
-                            url: "../homePage/homePage"
-                        });
-                    } else {
-                        app.openToast("表单不完整")
-                    }
-                })
-            }
-        });
-    },
-    bindSwitchChange: function (e) {
-        var that = this;
-        var i = e.detail.value;
-        that.setData({
-            hasPrivate: i,
-        });
-    },
-    bindBountyChange: function (e) {
-        var that = this;
-        var i = e.detail.value;
-        that.setData({
-            bountyIndex: i,
-        });
-    },
-    bindDateChange: function (e) {
-        this.setData({
-            date: e.detail.value
-        })
-    },
-    bindTimeChange: function (e) {
-        this.setData({
-            time: e.detail.value
-        })
     },
     getTask: function(e){
         let that = this;
@@ -154,13 +95,37 @@ Page({
             "hunter": hunter,
             "status": 3
         }
+        console.log("task_id", that.data.id);
         app.reqToServer("tasks/"+that.data.id, "POST", form, (res)=>{
-            console.log(res);
             app.openToast("领取成功!");
             wx.reLaunch({
                 url: '../homePage/homePage',
             })
         });
+    },
+    complete: function() {
+        let that = this;
+        let form = {
+            "verb": "done"
+        }
+        app.reqToServer("tasks/"+ that.data.id, "POST", form, (res)=>{
+            app.openToast("任务完成");
+            wx.navigateBack({
+                delta: 1
+            });
+        })
+    },
+    cancel: function(){
+        let that = this;
+        let form = {
+            "verb": "cancel"
+        }
+        app.reqToServer("tasks/" + that.data.id, "POST", form, (res) => {
+            app.openToast("任务已取消");
+            wx.navigateBack({
+                delta: 1
+            });
+        })
     },
     showLocation: function () {
         var that = this;

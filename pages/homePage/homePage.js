@@ -33,6 +33,7 @@ Page({
                 that.setData({
                     taskArray: task_list
                 })
+                wx.hideLoading();
             })
         }
         // thst.setData 
