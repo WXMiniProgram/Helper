@@ -17,19 +17,11 @@ Page({
         description:"",
         hasPrivate: false,
         hiddenMsg: "",
-        status: 0, // 0：新任务 1：待领取 2：已领取 3：进行中 4：已完成
-        isPublisher: true, // 临时加的 判断是不是当前用户创建的这个任务
-        canModify: true,
         publisher: {
             "openid": null,
             "username": null,
             "avatar": null,
         },
-        hunter: {
-            "openid": null,
-            "username": null,
-            "avatar": null,
-        }
     },
     onLoad: function (options) {
         var that = this;
@@ -47,12 +39,8 @@ Page({
                     description: detail["description"],
                     // hiddenMsg 要传吗？？在HTTP层能拿到
                     hasPrivate: detail["private"] != null,
-                    status: detail["status"],
-                    isPublisher: publisher["id"] == app.globalData.userinfo.id,
                     // 发布者，且任务未结束的时候才能修改
-                    canModify: publisher["id"] == app.globalData.userinfo.id && detail["status"] <= 3,
                     publisher: params["publisher"],
-                    hunter: params["hunter"]
                 })
             })
             let publisher = params["publisher"];
@@ -64,8 +52,6 @@ Page({
                     "username": publisher["username"],
                     "avatar": publisher["avatar"]
                 },
-                canModify: true,
-                isPublisher: true
             });
         }
     },
@@ -86,7 +72,6 @@ Page({
                 publisher_username: that.data.publisher.username,
                 publisher_avatar: that.data.publisher.avatar,  
             },
-            hunter: null
         }
         app.openConfirm("确认发布？", "任务完成前仍可随时更改", "发送", "取消", (e) => {
             if(e.confirm){

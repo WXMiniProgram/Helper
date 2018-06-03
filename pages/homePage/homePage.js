@@ -48,7 +48,7 @@ Page({
     },
     goTaskDetail: function(){
         wx.navigateTo({
-            url: '../createTask/createTask?id=1',
+            url: '../taskDetail/taskDetail?id=1',
             success: function () {
                 console.log('success')
             },

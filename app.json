@@ -3,6 +3,7 @@
       "pages/homePage/homePage",
       "pages/uploadImg/uploadImg",
       "pages/createTask/createTask",
+      "pages/taskDetail/taskDetail",
       "pages/checkList/checkList",
       "pages/myInfo/myInfo",
       "pages/response/response_success",
