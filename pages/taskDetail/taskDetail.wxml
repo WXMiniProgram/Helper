@@ -2,7 +2,7 @@
 
 <form bindsubmit='formSubmit' class='page'>
     <view class='page__bd'>
-        <view class="weui-cells__title">标题（必填）：</view>
+        <view class="weui-cells__title">标题：</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__bd">
@@ -46,7 +46,7 @@
         </view>
         <view class="weui-cells__title">任务地点：</view>
         <view class="weui-cells weui-cells_after-title">
-            <navigator bindtap='chooseLocation' class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <navigator bindtap='showLocation' class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view id="location" class="weui-cell__bd">{{location.name}}</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access"></view>
             </navigator>
@@ -56,13 +56,13 @@
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
                 <view class="weui-cell__bd">
-                    <textarea class="weui-textarea" placeholder="此详情为公开信息，请不要在此填入类似 快递箱密码 等重要信息（如有，请开启 '使用隐藏信息' 中）" bindconfirm="setDescription" disabled='{{!canModify}}' value="{{description}}" name="desc" style="height: 4em" />
+                    <textarea class="weui-textarea" placeholder="暂无" bindconfirm="setDescription" disabled='{{!canModify}}' value="{{description}}" name="desc" style="height: 4em" />
                 </view>
             </view>
             <view class="weui-cell weui-cell_switch">
-                <view class="weui-cell__bd">使用隐藏信息</view>
+                <view class="weui-cell__bd">隐藏信息</view>
                 <view class="weui-cell__ft">
-                    <switch bindchange='bindSwitchChange' disabled='{{!canModify}}'/>
+                    <switch bindchange='bindSwitchChange' disabled='{{!canAccess}}'/>
                 </view>
             </view>
             <view wx:if="{{hasPrivate}}" class="weui-cell">
@@ -89,11 +89,10 @@
                 <view wx:else class="weui-cell__ft weui-cell__ft_in-access">{{hunter.username}}</view>
             </navigator>
         </view>
-        <button wx:if="{{isPublisher && status == 0}}" formType="submit" bindtap="submit" class="weui-btn" type="primary">发布</button>
-        <button wx:elif="{{isPublisher && (status == 1 || status == 2 || status == 3)}}" bindtap='submit' class="weui-btn" type="primary">更新</button>
-        <button wx:elif="{{!isPublisher && status == 1}}" bindtap='get' class="weui-btn" type="primary">领取</button>
-        <button wx:elif="{{!isPublisher && status > 1}}" disabled='true' class="weui-btn" type="primary">已领取</button>
-        <button wx:if="{{isPublisher && status > 0 && status < 4}}" bindtap="cancel" class="weui-btn" type="warn">取消任务</button>
-        <button wx:if="{{isPublisher && status == 4}}" bindtap="cancel" class="weui-btn" type="warn">从记录中删除</button>
+        <button wx:if="{{canModify}}" bindtap='submit' class="weui-btn" type="primary">更新</button>
+        <button wx:if="{{canModify && status > 0 && status < 4}}" bindtap="cancel" class="weui-btn" type="warn">取消任务</button>
+        <button wx:elif="{{!canModify && status<=1}}" bindtap='getTask' class="weui-btn" type="primary">领取</button>
+        <button wx:elif="{{!canModify && !canAccess && status > 1}}" disabled='true' class="weui-btn" type="primary">已领取</button>
+        <button wx:if="{{canModify && status == 4}}" bindtap="cancel" class="weui-btn" type="warn">从记录中删除</button>
     </view>
 </form>

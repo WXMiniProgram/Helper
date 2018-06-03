@@ -25,19 +25,21 @@ App({
             })
         }
     },
+     /**
+         * openid: ID String
+         * username: String,
+         * name: String(read name),
+         * verify: Boolean,
+         * school: String,
+         * avatar: URL String,
+         * img: URL String,
+         * school_id: String
+         * 
+         */
     globalData: {
         userInfo: null,
         server: "https://abc.yhmeng.top/"
-        /*
-        {
-            _id: unique,
-            openid: unique,
-            username:String
-            avatar:url String
-            score:number
-            verify:boolean
-        }
-         */
+
     },
     // 　　const app = getApp()    其他文件 加这句就可以使用app.js里的内容 如app.toServer
     checkVerify(func){

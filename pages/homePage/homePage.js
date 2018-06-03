@@ -8,22 +8,34 @@ Page({
         sortArray: ['距离', '赏金', '时间'],
         filterIndex: 0,
         filterArray: ['全部', '取快递', '借东西', '其他'],
-        taskArray: [
-        {
-            latitude: 23.099794,
-            longitude: 113.324520,
-            posDes: "上海市人民广场",
-            picUrl: '../../images/bg01.jpg',
-            userId: "Cuttlefish",
-            userUrl: "../../images/img01.jpg",
-            srvDistance: 2,
-            srvTime: "今天 12:00",
-            srvTitle: "取快递",
-            srvDesc: "如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递~谢谢啦",
-            srvCost: 500,
-            taskId: "00000"
+        taskArray: [    ]
+    },
+    onLoad: function (options) {
+        wx.showLoading({
+            title: '拉取信息中',
+            mask: true
+        })
+        var server = app.globalData.server;
+        var that = this;
+        // console.log(Object.prototype.toString.call(options));
+        if (!options.mode || !options.user) {
+            app.reqToServer("tasks", "GET", null, (data) => {
+                var task_list = data["data"]["result"];
+                console.log("tasks:", task_list);
+                that.setData({
+                    taskArray: task_list
+                })
+                wx.hideLoading();
+            })
+        } else {
+            app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
+                var task_list = data["data"]["result"]
+                that.setData({
+                    taskArray: task_list
+                })
+            })
         }
-        ]
+        // thst.setData 
     },
     //事件处理函数
     bindSortChange:function(e) {
@@ -46,9 +58,9 @@ Page({
         });
         console.log("bindFilterChange")
     },
-    goTaskDetail: function(){
+    goTaskDetail: function(e){
         wx.navigateTo({
-            url: '../taskDetail/taskDetail?id=1',
+            url: '../taskDetail/taskDetail?id='+e.currentTarget.id,
             success: function () {
                 console.log('success')
             },
@@ -79,27 +91,5 @@ Page({
             url: '../myInfo/myInfo',
         })
     },
-    onLoad: function(options) {
-        var server = app.globalData.server;
-        var that = this;
-        // console.log(Object.prototype.toString.call(options));
-        if (options.mode == undefined || options.user == undefined) {
-            app.reqToServer("tasks", "GET", null, (data) => {
-                var task_list = data["data"]["result"];
-                console.log("tasks:", task_list);
-                that.setData({
-                    taskArray: task_list
-                })
-            })
-        } else {
-            console.log("tasks/" + options.mode + "/" + options.user);
-            app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
-                var task_list = data["data"]["result"]
-                that.setData({
-                taskArray: task_list
-                })
-            })
-        }
-        // thst.setData 
-    }
+    
 })
