@@ -8,7 +8,7 @@ App({
         wx.setStorageSync('logs', logs);
         that.globalData.userInfo = wx.getStorageSync("userInfo");
         // 登录\
-        //if(!that.globalData.userInfo){
+        // if(!that.globalData.userInfo){
         if(true){
             wx.login({
                 success: res => {
@@ -90,14 +90,6 @@ App({
             confirmText: confirmText,
             cancelText: cancelText,
             success: func
-            /*success: function (res) {
-                console.log(res);
-                if (res.confirm) {
-                    console.log('用户点击主操作')
-                } else {
-                    console.log('用户点击辅助操作')
-                }
-            }*/
         });
     },
     openToast: function(title, duration = 3000){
