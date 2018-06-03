@@ -7,7 +7,7 @@ Page({
         isMyInfo: false,
         location: {},
         sortIndex: 0,
-        sortArray: ['距离', '赏金', '时间'],
+        sortArray: ['距离', '赏金'],
         filterIndex: 0,
         filterArray: ['全部', '取快递', '借东西', '其他'],
         taskArray: []
@@ -54,9 +54,21 @@ Page({
             })
             app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
                 var task_list = data["data"]["result"]
+                for (var i = 0; i < task_list.length; i++) {
+                    console.log("----------calculateDistance--------------");
+                    var La1 = that.data.location.latitude * Math.PI / 180.0;
+                    var La2 = task_list[i].taskloc.latitude * Math.PI / 180.0;
+                    var La3 = La1 - La2;
+                    var Lb3 = that.data.location.longitude * Math.PI / 180.0 - task_list[i].taskloc.longitude * Math.PI / 180.0;
+                    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
+                    s = s * 6378.137;//地球半径
+                    s = Math.round(s * 10000) / 10000;
+                    task_list[i]["distance"] = s.toFixed(2);
+                }
                 that.setData({
                     taskArray: task_list
                 })
+                that.taskSort();
                 wx.hideLoading();
             })
         }
@@ -129,7 +141,7 @@ Page({
                 }
             }
             console.log("排序后taskArray", this.data.taskArray);
-        } else if (this.data.sortIndex == 1) {
+        } else if(this.data.sortIndex == 1) {
             console.log("按赏金排序");
             for (var i = 0; i < this.data.taskArray.length; i++) {
                 for (var j = i + 1; j < this.data.taskArray.length; j++) {
@@ -141,9 +153,6 @@ Page({
                 }
             }
             console.log("排序后taskArray", this.data.taskArray);
-        } else {
-            console.log("按时间排序");
-
         }
         this.setData({
             taskArray: this.data.taskArray

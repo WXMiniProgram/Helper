@@ -63,7 +63,6 @@ Page({
                             canAccess = true;
                         }
                     }
-                    console.log(detail["status"], canModify, canAccess);
                     that.setData({
                         id: detail["id"],
                         title: detail["caption"],
