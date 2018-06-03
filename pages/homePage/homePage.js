@@ -21,6 +21,7 @@ Page({
             curtype: that.data.sortArray[i]
         });
         console.log("bindSortChange")
+        that.taskSort();
     },
     bindFilterChange:function(e) {
         console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -75,6 +76,39 @@ Page({
             }
         })
     },
+    taskSort:function() {
+        if (this.data.sortIndex == 0) {
+            console.log("按距离排序");
+            for(var i =0; i<this.data.taskArray.length; i++) {
+                for(var j = i+1; j<this.data.taskArray.length; j++) {
+                    if(this.data.taskArray[i].distance > this.data.taskArray[j].distance) {
+                        var temp = this.data.taskArray[i];
+                        this.data.taskArray[i] = this.data.taskArray[j];
+                        this.data.taskArray[j] = temp;
+                    }
+                }
+            }
+            console.log("排序后taskArray", this.data.taskArray);
+        } else if (this.data.sortIndex == 1) {
+            console.log("按赏金排序");
+            for (var i = 0; i < this.data.taskArray.length; i++) {
+                for (var j = i + 1; j < this.data.taskArray.length; j++) {
+                    if (this.data.taskArray[i].bounty < this.data.taskArray[j].bounty) {
+                        var temp = this.data.taskArray[i];
+                        this.data.taskArray[i] = this.data.taskArray[j];
+                        this.data.taskArray[j] = temp;
+                    }
+                }
+            }
+            console.log("排序后taskArray", this.data.taskArray);
+        } else {
+            console.log("按时间排序");
+            
+        }
+        this.setData({
+            taskArray: this.data.taskArray
+        })
+    },
     onLoad: function(options) {
         var server = app.globalData.server;
         var that = this;
@@ -98,7 +132,7 @@ Page({
                     var Lb3 = that.data.location.longitude * Math.PI / 180.0 - task_list[i].taskloc.longitude * Math.PI / 180.0;
                     var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
                     s = s * 6378.137;//地球半径
-                    s = Math.round(s * 10000) / 10;
+                    s = Math.round(s * 10000) / 10000;
                     task_list[i]["distance"] = s;
                 }
                 that.setData({
@@ -107,6 +141,7 @@ Page({
                 console.log("taskArray", that.data.taskArray);
             })
         }
+        that.taskSort();
     },
     calculateDistance: function (e) {
         // la1, lo1, la2, lo2
