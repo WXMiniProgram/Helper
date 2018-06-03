@@ -30,7 +30,7 @@
                 <view class="weui-panel__hd">
                     <image src='{{item.publisher.publisher_avatar}}' class='avatar-sm avatar-circle'></image> 
                     {{item.publisher.publisher_username}}
-                    <label class='right-tag'>{{item.distance}} m</label>>
+                    <label class='right-tag'>{{item.distance}} km</label>>
                 </view>
                 <view class="weui-panel__bd">
                     <view class="weui-media-box weui-media-box_text">
