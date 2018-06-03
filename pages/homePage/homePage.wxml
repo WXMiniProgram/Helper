@@ -26,7 +26,7 @@
             </view>
         </view>
         <view wx:for="{{taskArray}}" wx:key="id" class="weui-panel">
-            <view bindtap='goTaskDetail'>
+            <view id='{{item.id}}' bindtap='goTaskDetail'>
                 <view class="weui-panel__hd">
                     <image src='{{item.publisher.publisher_avatar}}' class='avatar-sm avatar-circle'></image> 
                     {{item.publisher.publisher_username}}
@@ -38,7 +38,7 @@
                         <view class="weui-media-box__desc">{{item.description}}</view>
                         <view class="weui-media-box__info">
                             <view class="weui-media-box__info__meta">赏金：{{item.bounty}} 元</view>
-                            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">  {{item.starttime}}</view>
+                            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">  {{item.taskloc.name}}</view>
                         </view>
                     </view>
                 </view>

@@ -12,6 +12,55 @@ Page({
         filterArray: ['全部', '取快递', '借东西', '其他'],
         taskArray: []
     },
+    onLoad: function (options) {
+        wx.showLoading({
+            title: '拉取信息中',
+            mask: true
+        })
+        var server = app.globalData.server;
+        var that = this;
+        if(app.globalData.location) {
+            that.setData({
+                location: app.globalData.location
+            })
+        }
+        if (!options.mode || !options.user) {
+            that.setData({
+                isMyInfo: false
+            })
+            app.reqToServer("tasks", "GET", null, (data) => {
+                var task_list = data["data"]["result"];
+                console.log("tasks:", task_list);
+                for (var i = 0; i < task_list.length; i++) {
+                    console.log("----------calculateDistance--------------");
+                    var La1 = that.data.location.latitude * Math.PI / 180.0;
+                    var La2 = task_list[i].taskloc.latitude * Math.PI / 180.0;
+                    var La3 = La1 - La2;
+                    var Lb3 = that.data.location.longitude * Math.PI / 180.0 - task_list[i].taskloc.longitude * Math.PI / 180.0;
+                    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
+                    s = s * 6378.137;//地球半径
+                    s = Math.round(s * 10000) / 10000;
+                    task_list[i]["distance"] = s;
+                }
+                that.setData({
+                    taskArray: task_list
+                });
+                that.taskSort();
+                wx.hideLoading();
+            })
+        } else {
+            that.setData({
+                isMyInfo: true
+            })
+            app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
+                var task_list = data["data"]["result"]
+                that.setData({
+                    taskArray: task_list
+                })
+                wx.hideLoading();
+            })
+        }
+    },
     //事件处理函数
     bindSortChange:function(e) {
         console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -34,9 +83,9 @@ Page({
         });
         console.log("bindFilterChange")
     },
-    goTaskDetail: function(){
+    goTaskDetail: function(e){
         wx.navigateTo({
-            url: '../taskDetail/taskDetail?id=1',
+            url: '../taskDetail/taskDetail?id='+e.currentTarget.id,
             success: function () {
                 console.log('success')
             },
@@ -49,7 +98,6 @@ Page({
         })
     },
     goCreateTask:function() {
-        console.log('goCreateTask')
         wx.navigateTo({
             url: '../createTask/createTask',
             success:function() {
@@ -66,15 +114,6 @@ Page({
     goMyInfo:function() {
         wx.navigateTo({
             url: '../myInfo/myInfo',
-            success:function() {
-
-            },
-            fail:function() {
-
-            },
-            complete:function() {
-
-            }
         })
     },
     taskSort:function() {
@@ -109,68 +148,5 @@ Page({
         this.setData({
             taskArray: this.data.taskArray
         })
-    },
-    onLoad: function(options) {
-        var server = app.globalData.server;
-        var that = this;
-        console.log("-----homePage onLoad() app.globalData.location=", app.globalData.location);
-        if(app.globalData.location) {
-            console.log("-----homePage onLoad() app.globalData.location=", app.globalData.location);
-            that.setData({
-                location: app.globalData.location
-            })
-        }
-        if (options.mode == undefined || options.user == undefined) {
-            console.log("无传入值，homePage页面，获取所有taskList");
-            that.setData({
-                isMyInfo: false
-            })
-            app.reqToServer("tasks", "GET", null, (data) => {
-                var task_list = data["data"]["result"];
-                console.log("tasks:", task_list);
-                for (var i = 0; i < task_list.length; i++) {
-                    console.log("----------calculateDistance--------------");
-                    var La1 = that.data.location.latitude * Math.PI / 180.0;
-                    var La2 = task_list[i].taskloc.latitude * Math.PI / 180.0;
-                    var La3 = La1 - La2;
-                    var Lb3 = that.data.location.longitude * Math.PI / 180.0 - task_list[i].taskloc.longitude * Math.PI / 180.0;
-                    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
-                    s = s * 6378.137;//地球半径
-                    s = Math.round(s * 10000) / 10000;
-                    task_list[i]["distance"] = s;
-                }
-                that.setData({
-                    taskArray: task_list
-                });
-                that.taskSort();
-                console.log("taskArray", that.data.taskArray);
-            })
-        } else {
-            console.log("options=", options);
-            that.setData({
-                isMyInfo: true
-            })
-            app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
-                var task_list = data["data"]["result"]
-                that.setData({
-                    taskArray: task_list
-                })
-            })
-        }
-    },
-    calculateDistance: function (e) {
-        // la1, lo1, la2, lo2
-        
-        console.log("location", this.location);
-        console.log("e", e);
-        var La1 = this.location.latitude * Math.PI / 180.0;
-        var La2 = e.latitude * Math.PI / 180.0;
-        var La3 = La1 - La2;
-        var Lb3 = this.location.longitude * Math.PI / 180.0 - e.longitude * Math.PI / 180.0;
-        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
-        s = s * 6378.137;//地球半径
-        s = Math.round(s * 10000) / 10;
-        console.log(s);
-        return s;
     }
 })

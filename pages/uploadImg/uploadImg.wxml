@@ -33,6 +33,7 @@
                 </view>
             </view>
             <view class="weui-cells__tips">照片要求为学生证正面（有名字那面）照片</view>
+            <view class="weui-cells__tips">照片大小限制在 1M内</view>
             <button open-type='getUserInfo' bindgetuserinfo="chooseImg"  wx:if="{{file == null}}" class="weui-btn" type="primary" >选择照片</button>
             <view wx:else>
                 <image src="{{file}}"></image>

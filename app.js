@@ -8,7 +8,7 @@ App({
         wx.setStorageSync('logs', logs);
         that.globalData.userInfo = wx.getStorageSync("userInfo");
         // 登录\
-        //if(!that.globalData.userInfo){
+        // if(!that.globalData.userInfo){
         if(true){
             wx.login({
                 success: res => {
@@ -32,23 +32,42 @@ App({
         });
         // console.log("app.js onLaunch() app.globalData.location=", that.globalData.location);
     },
+     /**
+         * openid: ID String
+         * username: String,
+         * name: String(read name),
+         * verify: Boolean,
+         * school: String,
+         * avatar: URL String,
+         * img: URL String,
+         * school_id: String
+         * 
+         */
     globalData: {
         userInfo: null,
         locaion: null,
         server: "https://abc.yhmeng.top/"
-        /*
-        {
-            _id: unique,
-            openid: unique,
-            username:String
-            avatar:url String
-            score:number
-            verify:boolean
-        }
-         */
+
     },
     // 　　const app = getApp()    其他文件 加这句就可以使用app.js里的内容 如app.toServer
-    
+    checkVerify(func){
+        if(true){
+        //if (this.globalData.userInfo.verify){
+            func();
+        }else{
+            this.openConfirm("未认证", "通过认证后方可继续", "去认证", "取消", (res)=>{
+                if(res.confirm){
+                    wx.navigateTo({
+                        url: '../uploadImg/uploadImg',
+                    })
+                }else{
+                    wx.navigateBack({
+                        delta: 1
+                    })
+                }
+            })
+        }
+    },
     reqToServer: function(url, method="GET", formData=null, succfunc=function(){}, errfunc=function(){}){
         var that = this;
         wx.request({
@@ -81,14 +100,6 @@ App({
             confirmText: confirmText,
             cancelText: cancelText,
             success: func
-            /*success: function (res) {
-                console.log(res);
-                if (res.confirm) {
-                    console.log('用户点击主操作')
-                } else {
-                    console.log('用户点击辅助操作')
-                }
-            }*/
         });
     },
     openToast: function(title, duration = 3000){
