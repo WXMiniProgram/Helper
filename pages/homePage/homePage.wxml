@@ -45,7 +45,7 @@
             </view>
         </view>
 
-        <view class="homepage-bottom">
+        <view class="{{isMyInfo?'homepage-bottom-hide':'homepage-bottom'}}">
             <view class="homepage-bottom-center">
             <button class="circle-button create-button" bindtap="goCreateTask" type="default" size="default" style='background-color: yellow'>
                 <view class='iconfont icon-add homepage-create-icon'></view>
@@ -57,7 +57,6 @@
             </button>
             </view>
         </view>
-
     </view>
   <!--<view class="homepage-top">
     <picker class="homepage-top-left" bindchange="bindSortChange" value="{{sortIndex}}" range="{{sortArray}}">

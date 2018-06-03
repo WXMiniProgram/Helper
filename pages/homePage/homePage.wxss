@@ -48,6 +48,9 @@
   align-items: center;
 }
 
+.homepage-bottom-hide{
+    display: none;
+}
 .homepage-bottom-right{
   width: 20%;
   height: 17%;
