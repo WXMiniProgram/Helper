@@ -24,9 +24,17 @@ App({
                 }
             })
         }
+        wx.getLocation({
+            success: function (res) {
+                console.log("----------", res);
+                that.globalData.location = res;
+            },
+        });
+        // console.log("app.js onLaunch() app.globalData.location=", that.globalData.location);
     },
     globalData: {
         userInfo: null,
+        locaion: null,
         server: "https://abc.yhmeng.top/"
         /*
         {

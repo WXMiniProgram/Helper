@@ -4,26 +4,12 @@ const app = getApp()
 
 Page({
     data: {
+        location: {},
         sortIndex: 0,
         sortArray: ['距离', '赏金', '时间'],
         filterIndex: 0,
         filterArray: ['全部', '取快递', '借东西', '其他'],
-        taskArray: [
-        {
-            latitude: 23.099794,
-            longitude: 113.324520,
-            posDes: "上海市人民广场",
-            picUrl: '../../images/bg01.jpg',
-            userId: "Cuttlefish",
-            userUrl: "../../images/img01.jpg",
-            srvDistance: 2,
-            srvTime: "今天 12:00",
-            srvTitle: "取快递",
-            srvDesc: "如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递如题，求帮忙去快递~谢谢啦",
-            srvCost: 500,
-            taskId: "00000"
-        }
-        ]
+        taskArray: []
     },
     //事件处理函数
     bindSortChange:function(e) {
@@ -92,26 +78,49 @@ Page({
     onLoad: function(options) {
         var server = app.globalData.server;
         var that = this;
-        // console.log(Object.prototype.toString.call(options));
+        console.log("-----homePage onLoad() app.globalData.location=", app.globalData.location);
+        if(app.globalData.location) {
+            console.log("-----homePage onLoad() app.globalData.location=", app.globalData.location);
+            that.setData({
+                location: app.globalData.location
+            })
+        }
         if (options.mode == undefined || options.user == undefined) {
             console.log("无传入值，homePage页面，获取所有taskList");
             app.reqToServer("tasks", "GET", null, (data) => {
                 var task_list = data["data"]["result"];
                 console.log("tasks:", task_list);
+                for (var i = 0; i < task_list.length; i++) {
+                    console.log("----------calculateDistance--------------");
+                    var La1 = that.data.location.latitude * Math.PI / 180.0;
+                    var La2 = task_list[i].taskloc.latitude * Math.PI / 180.0;
+                    var La3 = La1 - La2;
+                    var Lb3 = that.data.location.longitude * Math.PI / 180.0 - task_list[i].taskloc.longitude * Math.PI / 180.0;
+                    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
+                    s = s * 6378.137;//地球半径
+                    s = Math.round(s * 10000) / 10;
+                    task_list[i]["distance"] = s;
+                }
                 that.setData({
                     taskArray: task_list
-                })
-            })
-        } else {
-            console.log("options=", options);
-            console.log("tasks/" + options.mode + "/" + options.user);
-            app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
-                var task_list = data["data"]["result"]
-                that.setData({
-                taskArray: task_list
-                })
+                });
+                console.log("taskArray", that.data.taskArray);
             })
         }
-        // thst.setData 
+    },
+    calculateDistance: function (e) {
+        // la1, lo1, la2, lo2
+        
+        console.log("location", this.location);
+        console.log("e", e);
+        var La1 = this.location.latitude * Math.PI / 180.0;
+        var La2 = e.latitude * Math.PI / 180.0;
+        var La3 = La1 - La2;
+        var Lb3 = this.location.longitude * Math.PI / 180.0 - e.longitude * Math.PI / 180.0;
+        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
+        s = s * 6378.137;//地球半径
+        s = Math.round(s * 10000) / 10;
+        console.log(s);
+        return s;
     }
 })
