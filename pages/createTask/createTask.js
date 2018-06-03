@@ -17,19 +17,11 @@ Page({
         description:"",
         hasPrivate: false,
         hiddenMsg: "",
-        status: 0, // 0：新任务 1：待领取 2：已领取 3：进行中 4：已完成
-        isPublisher: true, // 临时加的 判断是不是当前用户创建的这个任务
-        canModify: true,
         publisher: {
             "openid": null,
             "username": null,
             "avatar": null,
         },
-        hunter: {
-            "openid": null,
-            "username": null,
-            "avatar": null,
-        }
     },
     onLoad: function (options) {
         app.checkVerify(()=>{
@@ -88,7 +80,6 @@ Page({
                 publisher_username: that.data.publisher.username,
                 publisher_avatar: that.data.publisher.avatar,  
             },
-            hunter: null
         }
         app.openConfirm("确认发布？", "任务完成前仍可随时更改", "发送", "取消", (e) => {
             if(e.confirm){
