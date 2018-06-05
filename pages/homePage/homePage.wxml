@@ -26,7 +26,7 @@
             </view>
         </view>
         <view wx:for="{{taskArray}}" wx:key="id" class="weui-panel">
-            <view id='{{item.id}}' bindtap='goTaskDetail'>
+            <view wx:if="{{item.distance < 5.0}}" id='{{item.id}}' bindtap='goTaskDetail'>
                 <view class="weui-panel__hd">
                     <image src='{{item.publisher.publisher_avatar}}' class='avatar-sm avatar-circle'></image>
                     {{item.publisher.publisher_username}}
@@ -52,7 +52,7 @@
             </button>
             </view>
             <view class="homepage-bottom-right">
-            <button class="circle-button" bindtap='goMyInfo' type="default" size="default">
+            <button class="circle-button" hover-class="circle-button-hover" bindtap='goMyInfo' type="default" size="default" style='background-color:white'>
                 <view class='iconfont icon-people homepage-bottom-icon'></view>
             </button>
             </view>

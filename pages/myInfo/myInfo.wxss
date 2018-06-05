@@ -7,6 +7,11 @@
     opacity: 0.2;
 }
 
+.container{
+    margin-left: 50rpx;
+    margin-right: 50rpx;
+}
+
 .wechat-info{
     height: 180rpx;
     display: flex;

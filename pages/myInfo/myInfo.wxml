@@ -1,7 +1,6 @@
 <!--pages/myInfo/myInfo.wxml-->
+<image class="bg" src='../../images/bg.jpg'></image>
 <view class='container'>
-    <image class="bg" src='../../images/bg.jpg'></image>
-
     <view class='wechat-info'>
         <image src='{{userInfo.avatar}}' class='avatar-bg avatar-circle'></image>
     </view>
