@@ -1,8 +1,8 @@
 {
   "pages":[
+      "pages/myInfo/myInfo",
       "pages/homePage/homePage",
       "pages/taskDetail/taskDetail",
-      "pages/myInfo/myInfo",
       "pages/uploadImg/uploadImg",
       "pages/createTask/createTask",
       "pages/checkList/checkList",

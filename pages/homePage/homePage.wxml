@@ -28,7 +28,7 @@
         <view wx:for="{{taskArray}}" wx:key="id" class="weui-panel">
             <view id='{{item.id}}' bindtap='goTaskDetail'>
                 <view class="weui-panel__hd">
-                    <image src='{{item.publisher.publisher_avatar}}' class='avatar-sm avatar-circle'></image> 
+                    <image src='{{item.publisher.publisher_avatar}}' class='avatar-sm avatar-circle'></image>
                     {{item.publisher.publisher_username}}
                     <label class='right-tag'>{{item.distance}} km</label>>
                 </view>

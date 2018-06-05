@@ -10,18 +10,20 @@
   box-sizing: border-box;
 }
 
-
 .page{
     background-color: #F8F8F8;
     font-size: 16px;
-    font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+    font-family: sans-serif,-apple-system-font,Helvetica Neue,Helvetica;
 }
+
 .page__hd {
     padding: 35rpx;
 }
+
 .page__bd {
     padding-bottom: 40px;
 }
+
 .page__bd_spacing {
     padding-left: 15px;
     padding-right: 15px;
@@ -61,11 +63,13 @@
 .avatar-circle {
     border-radius: 50%;
 }
+
 .avatar {
     width:100rpx; 
     height: 100rpx;
     vertical-align: middle;
 }
+
 .avatar-sm {
     width:50rpx; 
     height: 50rpx;
@@ -73,7 +77,7 @@
 }
 
 .avatar-bg {
-    width:150rpx; 
-    height: 150rpx;
+    width:180rpx; 
+    height: 180rpx;
     vertical-align: middle;
 }
