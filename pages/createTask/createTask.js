@@ -17,11 +17,7 @@ Page({
         description:"",
         hasPrivate: false,
         hiddenMsg: "",
-        publisher: {
-            "openid": null,
-            "username": null,
-            "avatar": null,
-        },
+        publisher: {    },
     },
     onLoad: function (options) {
         app.checkVerify(()=>{

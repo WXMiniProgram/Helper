@@ -26,7 +26,6 @@ App({
         }
         wx.getLocation({
             success: function (res) {
-                console.log("----------", res);
                 that.globalData.location = res;
             },
         });
