@@ -2,7 +2,7 @@
 <image class="bg" src='../../images/userbg.jpg'></image>
 <view class='container'>
     <view class='wechat-info'>
-        <image src='{{userInfo.avatar}}' class='avatar-bg avatar-circle'></image>
+        <image src='{{userInfo.avatar}}' class='avatar-bg avatar-circle avator-top'></image>
     </view>
     <view class="weui-cells__title">我的信息</view>
     <view class="weui-cells weui-cells_after-title">

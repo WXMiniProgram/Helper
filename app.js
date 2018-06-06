@@ -45,9 +45,8 @@ App({
          */
     globalData: {
         userInfo: null,
-        locaion: null,
+        location: null,
         server: "https://abc.yhmeng.top/"
-
     },
     // 　　const app = getApp()    其他文件 加这句就可以使用app.js里的内容 如app.toServer
     checkVerify(func){

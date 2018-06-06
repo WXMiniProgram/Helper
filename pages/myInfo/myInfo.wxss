@@ -5,6 +5,7 @@
     height: 100%;
     position: absolute;
     opacity: 0.2;
+    background-color: transparent;
 }
 
 .container{
@@ -20,4 +21,9 @@
     align-items: center;
     margin-top: 60rpx;
     margin-bottom: 120rpx;
+}
+
+.avator-top{
+    position: relative;
+    z-index: 99;
 }

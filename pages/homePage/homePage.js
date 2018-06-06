@@ -22,7 +22,8 @@ Page({
         if(app.globalData.location) {
             that.setData({
                 location: app.globalData.location
-            })
+            });
+            console.log("-----location", that.data.location);
         }
         if (!options.mode || !options.user) {
             that.setData({

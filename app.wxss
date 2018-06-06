@@ -71,8 +71,8 @@
 }
 
 .avatar-sm {
-    width:50rpx; 
-    height: 50rpx;
+    width:55rpx; 
+    height: 55rpx;
     vertical-align: middle;
 }
 

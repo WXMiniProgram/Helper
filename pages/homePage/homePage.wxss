@@ -109,15 +109,11 @@
     margin-top: 30rpx;
     margin-left: 40rpx;
     margin-right: 40rpx;
-    border-radius: 5%;
-    border-left: 1rpx solid #e5e5e5;
-    border-right: 1rpx solid #e5e5e5;
-    box-shadow: 2px 2px 5px 2px #e5e5e5;
-    background-color: #FCFAF2;
+    border-radius: 10px;
+    background-color: white;
 }
 
 .right-tag {
-    font-size: 18px;
     color: greenyellow;
     float: right;
     margin-right: 20rpx;
