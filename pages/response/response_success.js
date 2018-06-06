@@ -18,8 +18,8 @@ Page({
         })
     },
     returnHome: function(e){
-        wx.navigateBack({
-            delta: 2
+        wx.redirectTo({
+            url: '../homePage/homePage'
         })
     }
 })

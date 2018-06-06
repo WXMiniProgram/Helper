@@ -13,50 +13,50 @@ Page({
         taskArray: []
     },
     onLoad: function (options) {
-        let server = app.globalData.server;
+        console.log(app.fetchData, this.fetchData);
         let that = this;
         if (!app.globalData.location) {
             app.homePageLoad = (datas)=>{
                 that.setData({
                     location: app.globalData.location
                 });
-                if (!options.mode || !options.user) {
-                    that.setData({
-                        isMyInfo: false
-                    })
-                    app.reqToServer("tasks", "GET", null, (data) => {
-                        if (app.globalData.location) {
-                            that.setData({
-                                location: app.globalData.location
-                            });
-                        }
-                        let task_list = data["data"]["result"];
-                        for (let i = 0; i < task_list.length; i++) {
-                            task_list[i]["distance"] = that.calcDistance(task_list[i].taskloc)
-                        }
-                        /*that.setData({
-                            taskArray: task_list
-                        });*/
-                        that.taskSort(task_list);
-                        wx.hideLoading();
-                    })
-                } else {
-                    that.setData({
-                        isMyInfo: true
-                    })
-                    app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
-                        let task_list = data["data"]["result"]
-                        for (let i = 0; i < task_list.length; i++) {
-                            task_list[i]["distance"] = that.calcDistance(task_list[i].taskloc)
-                        }
-                        that.setData({
-                            taskArray: task_list
-                        })
-                        that.taskSort();
-                        wx.hideLoading();
-                    })
-                }
+                that.loadTaskArray(options);
             }
+        }else{
+            that.loadTaskArray(options);
+        }
+    },
+    loadTaskArray: function(options) {
+        let that = this;
+        if (options.mode && options.user) {
+            that.setData({
+                isMyInfo: true
+            })
+            app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
+                let task_list = data["data"]["result"]
+                for (let i = 0; i < task_list.length; i++) {
+                    task_list[i]["distance"] = that.calcDistance(task_list[i].taskloc)
+                }
+                that.setData({
+                    taskArray: task_list
+                })
+                //that.taskSort(task_list);
+                console.log("beneath sort", that.data.taskArray);
+
+                wx.hideLoading();
+            })
+        } else {
+            that.setData({
+                isMyInfo: false
+            })
+            app.reqToServer("tasks", "GET", null, (data) => {
+                let task_list = data["data"]["result"];
+                for (let i = 0; i < task_list.length; i++) {
+                    task_list[i]["distance"] = that.calcDistance(task_list[i].taskloc)
+                }
+                that.taskSort(task_list);
+                wx.hideLoading();
+            })
         }
     },
     calcDistance: function(location){

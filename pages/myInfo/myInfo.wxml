@@ -34,14 +34,14 @@
         <navigator url="../homePage/homePage?mode=publisher&user={{userInfo.openid}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
             <view class="weui-cell__bd">
                 <view class="text-withbadge">我发布的</view>
-                <view class="badge weui-badge" > {{publishedNum}}</view>
+                <view wx:if="{{doing>0}}" class="badge weui-badge" > {{doing}}</view>
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
         <navigator url="../homePage/homePage?mode=hunter&user={{userInfo.openid}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
             <view class="weui-cell__bd">
                 <view class="text-withbadge">我领取的</view>
-                <view class="badge weui-badge"> {{huntedNum}}</view>
+                <view wx:if="{{hunting>0}}" class="badge weui-badge"> {{hunting}}</view>
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
