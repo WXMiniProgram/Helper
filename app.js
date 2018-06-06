@@ -1,15 +1,56 @@
 //app.js
 App({
+    globalData: {
+        userInfo: null,
+        location: null,
+        server: "https://abc.yhmeng.top/"
+    },
     onLaunch: function () {
+        wx.showLoading({
+            title: '拉取信息中',
+            mask: true
+        })
         // 展示本地存储能力
         var logs = wx.getStorageSync('logs') || []
         var that = this;
         logs.unshift(Date.now())
         wx.setStorageSync('logs', logs);
         that.globalData.userInfo = wx.getStorageSync("userInfo");
+        wx.getLocation({
+            success: function (res) {
+                that.globalData.location = res;
+                console.log("wx.getLocation()", res);
+                if (!that.globalData.userInfo) {
+                    //if(true){
+                    wx.login({
+                        success: res => {
+                            that.reqToServer("user/login/" + res.code, "GET", null, (res) => {
+                                let data = res["data"]["result"];
+                                console.log("userData", data);
+                                wx.setStorage({
+                                    key: 'userInfo',
+                                    data: data,
+                                })
+                                that.globalData.userInfo = res.data;
+                                if (that.homePageLoad) {
+                                    console.log("process homePageLoad");
+                                    that.homePageLoad();
+                                }
+                            });
+                        }
+                    })
+                }else{
+                    if (that.homePageLoad) {
+                        console.log("process homePageLoad");
+                        that.homePageLoad();
+                    }
+                }
+                
+            },
+        });
         // 登录\
-        // if(!that.globalData.userInfo){
-        if(true){
+        /*if(!that.globalData.userInfo){
+        //if(true){
             wx.login({
                 success: res => {
                     that.reqToServer("user/login/" + res.code, "GET", null, (res) => {
@@ -19,17 +60,15 @@ App({
                             key: 'userInfo',
                             data: data,
                         })
-                        that.globalData.userinfo = res.data;
+                        if (that.getUserInfoCallBack){
+                            that.getUserInfoCallBack(data);
+                        }
+                        that.globalData.userInfo = res.data;
                     });
                 }
             })
-        }
-        wx.getLocation({
-            success: function (res) {
-                that.globalData.location = res;
-            },
-        });
-        // console.log("app.js onLaunch() app.globalData.location=", that.globalData.location);
+        }*/
+        
     },
      /**
          * openid: ID String
@@ -42,11 +81,7 @@ App({
          * school_id: String
          * 
          */
-    globalData: {
-        userInfo: null,
-        location: null,
-        server: "https://abc.yhmeng.top/"
-    },
+    
     // 　　const app = getApp()    其他文件 加这句就可以使用app.js里的内容 如app.toServer
     checkVerify(func){
         if(true){
