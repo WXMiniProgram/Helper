@@ -2,16 +2,24 @@
 
 <form bindsubmit='formSubmit' class='page'>
     <view class='page__bd'>
-        <view class="weui-cells__title">标题（必填）：</view>
+        <view class="weui-cells__title">任务标题</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="简洁的叙述求助内容" bindconfirm="setTitle" value="{{title}}" name="title"/>
+                    <input class="weui-input" placeholder="例如“帮忙取快递”等需求" bindconfirm="setTitle" value="{{title}}" name="title"/>
                 </view>
             </view>
         </view>
 
-        <view class="weui-cells__title">详细信息：</view>
+        <view class="weui-cells__title">任务地点</view>
+        <view class="weui-cells weui-cells_after-title">
+            <navigator bindtap='chooseLocation' class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view id="location" class="weui-cell__bd">{{location.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+        </view>
+
+        <view class="weui-cells__title">详细信息</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
@@ -44,25 +52,18 @@
                 </view>
             </view>
         </view>
-        <view class="weui-cells__title">任务地点：</view>
-        <view class="weui-cells weui-cells_after-title">
-            <navigator bindtap='chooseLocation' class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view id="location" class="weui-cell__bd">{{location.name}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-            </navigator>
-        </view>
 
         <view class="weui-cells__title">任务详情</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
                 <view class="weui-cell__bd">
-                    <textarea class="weui-textarea" placeholder="此详情为公开信息，请不要在此填入类似 快递箱密码 等重要信息（如有，请开启 '使用隐藏信息' 中）" bindconfirm="setDescription" value="{{description}}" name="desc" style="height: 4em" />
+                    <textarea class="weui-textarea" placeholder="公开信息，请不要在此填入类似“快递箱密码”等重要信息(如有，请开启'使用隐藏信息'）" bindconfirm="setDescription" value="{{description}}" name="desc" style="height: 4em" />
                 </view>
             </view>
             <view class="weui-cell weui-cell_switch">
                 <view class="weui-cell__bd">使用隐藏信息</view>
                 <view class="weui-cell__ft">
-                    <switch bindchange='bindSwitchChange'/>
+                    <switch class='wx-switch-input' bindchange='bindSwitchChange'/>
                 </view>
             </view>
             <view wx:if="{{hasPrivate}}" class="weui-cell">
@@ -74,16 +75,12 @@
         <view class="weui-cells__title"></view>
         <view class="weui-cells weui-cells_after-title">
             <navigator url="../myinfo/myinfo" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__hd">
-                    <image src="{{publisher.avatar}}" class='avatar-sm avatar-circle'></image>
-                </view>
                 <view class="weui-cell__bd">发布人</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">{{publisher.username}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">
+                    <image src="{{publisher.avatar}}" class='avatar-sm avatar-circle'></image>
+                {{publisher.username}}</view>
             </navigator>
             <navigator url="../myinfo/myinfo?id={{hunter.openid}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__hd">
-                    <image src="{{hunter.avatar}}" class='avatar-sm avatar-circle'></image>
-                </view>
                 <view class="weui-cell__bd"> 领取人</view>
                 <view wx:if="{{hunter == null}}" class="weui-cell__ft weui-cell__ft_in-access">待领取</view>
                 <view wx:else class="weui-cell__ft weui-cell__ft_in-access">{{hunter.username}}</view>

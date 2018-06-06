@@ -18,10 +18,16 @@
 
 .page__hd {
     padding: 35rpx;
+    background-color: pink;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .page__bd {
     padding-bottom: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .page__bd_spacing {
