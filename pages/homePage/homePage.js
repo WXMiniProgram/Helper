@@ -21,7 +21,8 @@ Page({
                 });
                 that.loadTaskArray(options);
             }
-        }else{
+        }
+        else{
             wx.showLoading({
                 title: '拉取信息中',
                 mask: true
@@ -41,6 +42,7 @@ Page({
             for (let i = 0; i < task_list.length; i++) {
                 task_list[i]["distance"] = that.calcDistance(task_list[i].taskloc)
             }
+            console.log(task_list);
             that.setData({
                 isMyInfo: hasParam,
                 taskArray: that.taskSort(task_list),
@@ -68,7 +70,6 @@ Page({
             curtype: that.data.sortArray[i],
             taskArray: that.taskSort()
         });
-        console.log("bindSortChange")
     },
     bindFilterChange:function(e) {
         let that = this;
@@ -77,31 +78,15 @@ Page({
         filterIndex: i,
         curFilter: that.data.filterArray[i]
         });
-        console.log("bindFilterChange")
     },
     goTaskDetail: function(e){
         wx.navigateTo({
             url: '../taskDetail/taskDetail?id='+e.currentTarget.id,
-            success: function () {
-                console.log('success')
-            },
-            fail: function () {
-                console.log('fail')
-            },
-            complete: function () {
-
-            }
         })
     },
     goCreateTask:function() {
         wx.navigateTo({
             url: '../createTask/createTask',
-            success:function() {
-                console.log('success')
-            },
-            fail:function() {
-                console.log('fail')
-            },
         })
     },
     goMyInfo:function() {
