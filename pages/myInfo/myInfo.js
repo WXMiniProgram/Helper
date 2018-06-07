@@ -20,7 +20,6 @@ Page({
                     doing: res["data"]["amount"]
                 })
             })
-            //app.reqToServer("tasks/")
             this.setData({
                 userInfo: app.globalData.userInfo,
                 verify_status: app.globalData.userInfo.verify ? 2 : app.globalData.userInfo.username ? 1 :0

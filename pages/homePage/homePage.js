@@ -13,51 +13,40 @@ Page({
         taskArray: []
     },
     onLoad: function (options) {
-        console.log(app.fetchData, this.fetchData);
         let that = this;
         if (!app.globalData.location) {
-            app.homePageLoad = (datas)=>{
+            app.homePageLoad = ()=>{
                 that.setData({
                     location: app.globalData.location
                 });
                 that.loadTaskArray(options);
             }
         }else{
-            that.loadTaskArray(options);
+            wx.showLoading({
+                title: '拉取信息中',
+                mask: true
+            })
+            app.checkVerify(()=>{
+                that.loadTaskArray(options);
+            })
+            //app.homePageLoad()
         }
     },
     loadTaskArray: function(options) {
         let that = this;
-        if (options.mode && options.user) {
+        let hasParam = app.isValid(options.mode) && app.isValid(options.user)
+        let url = hasParam ? "tasks/" + options.mode + "/" + options.user : "tasks"
+        app.reqToServer(url, "GET", null, (data) => {
+            let task_list = data["data"]["result"]
+            for (let i = 0; i < task_list.length; i++) {
+                task_list[i]["distance"] = that.calcDistance(task_list[i].taskloc)
+            }
             that.setData({
-                isMyInfo: true
+                isMyInfo: hasParam,
+                taskArray: that.taskSort(task_list),
             })
-            app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
-                let task_list = data["data"]["result"]
-                for (let i = 0; i < task_list.length; i++) {
-                    task_list[i]["distance"] = that.calcDistance(task_list[i].taskloc)
-                }
-                that.setData({
-                    taskArray: task_list
-                })
-                //that.taskSort(task_list);
-                console.log("beneath sort", that.data.taskArray);
-
-                wx.hideLoading();
-            })
-        } else {
-            that.setData({
-                isMyInfo: false
-            })
-            app.reqToServer("tasks", "GET", null, (data) => {
-                let task_list = data["data"]["result"];
-                for (let i = 0; i < task_list.length; i++) {
-                    task_list[i]["distance"] = that.calcDistance(task_list[i].taskloc)
-                }
-                that.taskSort(task_list);
-                wx.hideLoading();
-            })
-        }
+            wx.hideLoading();
+        })
     },
     calcDistance: function(location){
         let that = this;
@@ -76,10 +65,10 @@ Page({
         let i = e.detail.value;
         that.setData({
             sortIndex: i,
-            curtype: that.data.sortArray[i]
+            curtype: that.data.sortArray[i],
+            taskArray: that.taskSort()
         });
         console.log("bindSortChange")
-        that.taskSort();
     },
     bindFilterChange:function(e) {
         let that = this;
@@ -142,8 +131,6 @@ Page({
                 }
             }
         }
-        this.setData({
-            taskArray: task_list
-        })
+        return task_list
     }
 })

@@ -138,5 +138,8 @@ App({
             icon: 'success',
             duration: duration
         });
+    },
+    isValid: function(v){
+        return v!=undefined && v!=null && v!=""
     }
 })
