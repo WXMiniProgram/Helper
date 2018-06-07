@@ -26,10 +26,10 @@ Page({
                 title: '拉取信息中',
                 mask: true
             })
-            app.checkVerify(()=>{
-                that.loadTaskArray(options);
+            that.setData({
+                location: app.globalData.location
             })
-            //app.homePageLoad()
+            that.loadTaskArray(options);
         }
     },
     loadTaskArray: function(options) {
@@ -53,7 +53,7 @@ Page({
         let La1 = that.data.location.latitude * Math.PI / 180.0;
         let La2 = location.latitude * Math.PI / 180.0;
         let La3 = La1 - La2;
-        let Lb3 = that.data.location.longitude * Math.PI / 180.0 - location.longitude * Math.PI / 180.0;
+        let Lb3 = location.longitude * Math.PI / 180.0 - location.longitude * Math.PI / 180.0;
         let s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
         s = s * 6378.137;//地球半径
         s = Math.round(s * 10000) / 10000;
