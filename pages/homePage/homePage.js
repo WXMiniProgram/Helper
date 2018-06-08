@@ -45,7 +45,7 @@ Page({
             console.log(task_list);
             that.setData({
                 isMyInfo: hasParam,
-                taskArray: that.taskSort(task_list),
+                taskArray: that.taskSort(task_list, hasParam),
             })
             wx.hideLoading();
         })
@@ -68,7 +68,7 @@ Page({
         that.setData({
             sortIndex: i,
             curtype: that.data.sortArray[i],
-            taskArray: that.taskSort()
+            taskArray: that.taskSort(that.data.taskArray)
         });
     },
     bindFilterChange:function(e) {
@@ -94,8 +94,19 @@ Page({
             url: '../myInfo/myInfo',
         })
     },
-    taskSort: function (task_list) {
-        if (this.data.sortIndex == 0) {
+    taskSort: function (task_list, isMyInfo=false) {
+        if(isMyInfo){
+            for (let i = 0; i < task_list.length; i++) {
+                for (let j = i + 1; j < task_list.length; j++) {
+                    if (task_list[i].status > task_list[j].status) {
+                        let temp = task_list[i];
+                        task_list[i] = task_list[j];
+                        task_list[j] = temp;
+                    }
+                }
+            }
+        }
+        else if (this.data.sortIndex == 0) {
             for (let i = 0; i < task_list.length; i++) {
                 for (let j = i + 1; j < task_list.length; j++) {
                     if (task_list[i].distance > task_list[j].distance) {

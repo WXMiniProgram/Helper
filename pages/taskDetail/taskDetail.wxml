@@ -28,9 +28,7 @@
                     <view class="weui-label">截止日期</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange" disabled="true">
-                        <view class="weui-input">{{date}}</view>
-                    </picker>
+                    <view class="weui-input">{{bounty}}</view>
                 </view>
             </view>
             <view class="weui-cell weui-cell_input">
