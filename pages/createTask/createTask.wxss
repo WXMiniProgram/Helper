@@ -9,3 +9,12 @@
 .avatar-circle {
     margin-right: 10rpx;
 }
+
+.page__bd{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.weui-cells_after-title{
+    margin-bottom: 35px;
+}

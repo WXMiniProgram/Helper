@@ -26,8 +26,6 @@
 
 .page__bd {
     padding-bottom: 40px;
-    margin-left: 20px;
-    margin-right: 20px;
 }
 
 .page__bd_spacing {
