@@ -18,9 +18,7 @@
                     <view class="weui-label">奖金(元)</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <picker mode="selector" value="{{bountyIndex}}" range="{{bountyArray}}" bindchange="bindBountyChange" disabled="true">
-                        <view class="weui-input">{{bountyArray[bountyIndex]}}</view>
-                    </picker>
+                    <view class="weui-input">{{bounty}}</view>
                 </view>
             </view>
             <view class="weui-cell weui-cell_input">
@@ -28,7 +26,7 @@
                     <view class="weui-label">截止日期</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <view class="weui-input">{{bounty}}</view>
+                    <view class="weui-input">{{date}}</view>
                 </view>
             </view>
             <view class="weui-cell weui-cell_input">
@@ -36,9 +34,9 @@
                     <view class="weui-label">截止时间</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange" disabled="true">
-                        <view class="weui-input">{{time}}</view>
-                    </picker>
+                    <view class="weui-cell__bd">
+                    <view class="weui-input">{{time}}</view>
+                </view>
                 </view>
             </view>
         </view>

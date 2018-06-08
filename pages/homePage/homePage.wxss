@@ -1,21 +1,22 @@
 /**homePage.wxss**/
 .homepage-container{
-  height:100%;
-  display:flex;
-  flex-direction: column;
-  align-items: center;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .homepage-top{
-  line-height: 40px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  background-color: white;
+    line-height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
 }
 
 .homepage-top-left{
-  flex-grow: 1;
+    padding-left: 30rpx;
+    flex-grow: 1;
 }
 
 .weui-search-bar__form {
@@ -24,34 +25,34 @@
 }
 
 .homepage-top-right{
-  flex-grow: 2;
+    flex-grow: 2;
     background-color: white;
 }
 
 .picker-view{
-  display:flex;
-  flex-direction: row;
+    display:flex;
+    flex-direction: row;
 }
 
 .homepage-top-icon{
-  padding-right: 8px;
-  padding-left: 8px;
+    padding-right: 8px;
+    padding-left: 8px;
 }
 
 .taskcard{
-  width: 85%;
+    width: 85%;
 }
 
 .homepage-bottom{
-  width: 100%;
-  height: 17%;
-  margin-bottom: 8px;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+    width: 100%;
+    height: 17%;
+    margin-bottom: 8px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .homepage-bottom-hide{
@@ -59,28 +60,28 @@
 }
 
 .homepage-bottom-right{
-  width: 20%;
-  height: 17%;
-  position: fixed;
-  right: 35px;
-  display: flex;
-  align-items: center;
+    width: 20%;
+    height: 17%;
+    position: fixed;
+    right: 35px;
+    display: flex;
+    align-items: center;
 }
 
 .homepage-bottom-center{
-  width: 30%;
-  height: 100%;
-  display: flex;
-  align-items: center;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .circle-button{
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .circle-button::after{
@@ -88,19 +89,21 @@
 }
 
 .create-button{
-  height: 83px;
-  width: 83px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    height: 83px;
+    width: 83px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .homepage-bottom-icon{
-  font-size: 25px;
+    font-size: 20px;
+    color: white;
 }
 
 .homepage-create-icon{
-  font-size: 45px;
+    font-size: 45px;
+    color: white;
 }
 
 .weui-search-bar {

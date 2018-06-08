@@ -47,12 +47,12 @@
 
         <view class="{{isMyInfo?'homepage-bottom-hide':'homepage-bottom'}}">
             <view class="homepage-bottom-center">
-            <button class="circle-button create-button" bindtap="goCreateTask" type="default" size="default" style='background-color:yellow'>
+            <button class="circle-button create-button" bindtap="goCreateTask" type="default" size="default" style='background-color:#FFCF73'>
                 <view class='iconfont icon-add homepage-create-icon'></view>
             </button>
             </view>
             <view class="homepage-bottom-right">
-            <button class="circle-button" hover-class="circle-button-hover" bindtap='goMyInfo' type="default" size="default" style='background-color:blue'>
+            <button class="circle-button" hover-class="circle-button-hover" bindtap='goMyInfo' type="default" size="default" style='background-color:#B8C5E3'>
                 <view class='iconfont icon-people homepage-bottom-icon'></view>
             </button>
             </view>
