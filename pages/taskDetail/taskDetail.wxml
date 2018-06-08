@@ -1,5 +1,5 @@
 <!--pages/createTask/createTask.wxml-->
-
+<image class="bg" src='../../images/userbg.jpg'></image>
 <form class='page'>
     <view class='page__bd'>
         <view class="weui-cells__title">标题：</view>
@@ -72,7 +72,7 @@
             </view>
         </view>
         <view class="weui-cells__title"></view>
-        <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cells weui-cells_after-title" id='publisher'>
             <navigator url="../myInfo/myInfo" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__hd">
                     <image src="{{publisher.avatar}}" class='avatar-sm avatar-circle'></image>
@@ -90,11 +90,11 @@
             </navigator>
         </view>
         
-        <button wx:if="{{status==-1}}" class="weui-btn" type="warn" disabled='true'>任务已取消</button>
-        <button wx:if="{{!canModify && status ==0}}" bindtap='getTask' class="weui-btn" type="primary">领取</button>
-        <button wx:elif="{{!canModify && status > 1}}" disabled='true' class="weui-btn" type="primary">已领取</button>
-        <button wx:if="{{canModify && status >= 0 && status < 4}}" bindtap="cancel" class="weui-btn" type="warn">取消任务</button>
-        <button wx:if="{{canModify && status >=0 && status < 4}}" bindtap="complete" class="weui-btn" type="primary">标记为完成</button>
+        <button wx:if="{{status==-1}}" class="weui-btn publish-button" type="warn" disabled='true'>任务已取消</button>
+        <button wx:if="{{!canModify && status ==0}}" bindtap='getTask' class="weui-btn publish-button" type="primary">领取</button>
+        <button wx:elif="{{!canModify && status > 1}}" disabled='true' class="weui-btn publish-button" type="primary">已领取</button>
+        <button wx:if="{{canModify && status >= 0 && status < 4}}" bindtap="cancel" class="weui-btn publish-button" type="warn">取消任务</button>
+        <button wx:if="{{canModify && status >0 && status < 4}}" bindtap="complete" class="weui-btn" type="primary">标记为完成</button>
         
     </view>
 </form>

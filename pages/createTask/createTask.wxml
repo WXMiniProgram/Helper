@@ -1,5 +1,5 @@
 <!--pages/createTask/createTask.wxml-->
-
+<image class="bg" src='../../images/userbg.jpg'></image>
 <form bindsubmit='formSubmit' class='page'>
     <view class='page__bd'>
         <view class="weui-cells__title">任务标题</view>
@@ -73,7 +73,7 @@
             </view>
         </view>
         <view class="weui-cells__title"></view>
-        <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cells weui-cells_after-title"  id='publisher'>
             <navigator url="../myinfo/myinfo" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__bd">发布人</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access">
@@ -86,7 +86,7 @@
                 <view wx:else class="weui-cell__ft weui-cell__ft_in-access">{{hunter.username}}</view>
             </navigator>
         </view>
-        <button formType="submit" bindtap="submit" class="weui-btn" type="primary">发布</button>
+        <button formType="submit" bindtap="submit" class="weui-btn" id='publish-button' type="primary">发布</button>
     </view>
 </form>
 
