@@ -26,7 +26,8 @@
             </view>
         </view>
         <view wx:for="{{taskArray}}" wx:key="id" class="weui-panel">
-            <view wx:if="{{ isMyInfo || item.distance < 5.0}}" id='{{item.id}}' class="{{isMyInfo? item.status<4? 'stamp-undone' :'stamp-done' :''}}" bindtap='goTaskDetail'>
+            <view wx:if="{{ isMyInfo || item.distance < 5.0}}" id='{{item.id}}' 
+            class="{{isMyInfo? item.status==4? 'stamp-done' : item.status==0? 'stamp-wait' :'stamp-undone' :''}}" bindtap='goTaskDetail'>
                 <view class="weui-panel__hd">
                     <image src='{{item.publisher.publisher_avatar}}' class='avatar-sm avatar-circle'></image>
                     {{item.publisher.publisher_username}}

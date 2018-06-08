@@ -177,3 +177,28 @@
     text-shadow: 0 0 2px rgb(254, 223, 225);
     box-shadow: 0 0 2px rgb(254, 223, 225);
 }
+
+.stamp-wait:after {
+    content:"待领取";
+    position:absolute;
+    top:120rpx;
+    right:90rpx;
+    z-index:1;
+    font-family:Arial,sans-serif;
+    -webkit-transform: rotate(-35deg); /* Safari */
+    -moz-transform: rotate(-35deg); /* Firefox */
+    -ms-transform: rotate(-35deg); /* IE */
+    -o-transform: rotate(-35deg); /* Opera */
+    transform: rotate(-35deg);
+    font-size:30px;
+    color: #FFE073;
+    border:solid 4px #FFE073;
+    padding:5px;
+    border-radius:10px;
+    zoom:1;
+    filter:alpha(opacity=20);
+    opacity:0.3;
+    -webkit-text-shadow: 0 0 2px #FFE073;
+    text-shadow: 0 0 2px #FFE073;
+    box-shadow: 0 0 2px #FFE073;
+}
