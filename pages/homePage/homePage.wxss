@@ -17,6 +17,7 @@
 .homepage-top-left{
   flex-grow: 1;
 }
+
 .weui-search-bar__form {
     border: none;
     border-radius: 10%;
@@ -80,17 +81,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
 }
 
-.circle-button-hover{
-    background-color: red;
+.circle-button::after{
+    border: none;
 }
 
 .create-button{
   height: 83px;
   width: 83px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;

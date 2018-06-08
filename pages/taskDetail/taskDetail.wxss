@@ -1,4 +1,11 @@
 /* pages/taskDetail/taskDetail.wxss */
+.bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    opacity: 0.2;
+    background-color: transparent;
+}
 
 #location {
     overflow: hidden;
@@ -8,4 +15,17 @@
 
 .avatar-circle {
     margin-right: 10rpx;
+}
+
+.page__bd{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#publisher{
+    margin-top: 1em;
+}
+
+.publish-button{
+    margin-top: 2.5em;
 }
