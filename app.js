@@ -19,7 +19,6 @@ App({
         wx.getLocation({
             success: function (res) {
                 that.globalData.location = res;
-                console.log("wx.getLocation()", res);
                 if (!that.globalData.userInfo) {
                     //if(true){
                     wx.login({
@@ -33,7 +32,6 @@ App({
                                 })
                                 that.globalData.userInfo = res.data;
                                 if (that.homePageLoad) {
-                                    console.log("process homePageLoad");
                                     that.homePageLoad();
                                 }
                             });
@@ -41,7 +39,6 @@ App({
                     })
                 }else{
                     if (that.homePageLoad) {
-                        console.log("process homePageLoad");
                         that.homePageLoad();
                     }
                 }
@@ -141,5 +138,8 @@ App({
             icon: 'success',
             duration: duration
         });
+    },
+    isValid: function(v){
+        return v!=undefined && v!=null && v!=""
     }
 })

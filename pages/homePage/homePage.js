@@ -13,58 +13,49 @@ Page({
         taskArray: []
     },
     onLoad: function (options) {
-        let server = app.globalData.server;
         let that = this;
         if (!app.globalData.location) {
-            app.homePageLoad = (datas)=>{
+            app.homePageLoad = ()=>{
                 that.setData({
                     location: app.globalData.location
                 });
-                if (!options.mode || !options.user) {
-                    that.setData({
-                        isMyInfo: false
-                    })
-                    app.reqToServer("tasks", "GET", null, (data) => {
-                        if (app.globalData.location) {
-                            that.setData({
-                                location: app.globalData.location
-                            });
-                        }
-                        let task_list = data["data"]["result"];
-                        for (let i = 0; i < task_list.length; i++) {
-                            task_list[i]["distance"] = that.calcDistance(task_list[i].taskloc)
-                        }
-                        /*that.setData({
-                            taskArray: task_list
-                        });*/
-                        that.taskSort(task_list);
-                        wx.hideLoading();
-                    })
-                } else {
-                    that.setData({
-                        isMyInfo: true
-                    })
-                    app.reqToServer("tasks/" + options.mode + "/" + options.user, "GET", null, (data) => {
-                        let task_list = data["data"]["result"]
-                        for (let i = 0; i < task_list.length; i++) {
-                            task_list[i]["distance"] = that.calcDistance(task_list[i].taskloc)
-                        }
-                        that.setData({
-                            taskArray: task_list
-                        })
-                        that.taskSort();
-                        wx.hideLoading();
-                    })
-                }
+                that.loadTaskArray(options);
             }
         }
+        else{
+            wx.showLoading({
+                title: '拉取信息中',
+                mask: true
+            })
+            that.setData({
+                location: app.globalData.location
+            })
+            that.loadTaskArray(options);
+        }
+    },
+    loadTaskArray: function(options) {
+        let that = this;
+        let hasParam = app.isValid(options.mode) && app.isValid(options.user)
+        let url = hasParam ? "tasks/" + options.mode + "/" + options.user : "tasks"
+        app.reqToServer(url, "GET", null, (data) => {
+            let task_list = data["data"]["result"]
+            for (let i = 0; i < task_list.length; i++) {
+                task_list[i]["distance"] = that.calcDistance(task_list[i].taskloc)
+            }
+            console.log(task_list);
+            that.setData({
+                isMyInfo: hasParam,
+                taskArray: that.taskSort(task_list),
+            })
+            wx.hideLoading();
+        })
     },
     calcDistance: function(location){
         let that = this;
         let La1 = that.data.location.latitude * Math.PI / 180.0;
         let La2 = location.latitude * Math.PI / 180.0;
         let La3 = La1 - La2;
-        let Lb3 = that.data.location.longitude * Math.PI / 180.0 - location.longitude * Math.PI / 180.0;
+        let Lb3 = location.longitude * Math.PI / 180.0 - location.longitude * Math.PI / 180.0;
         let s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
         s = s * 6378.137;//地球半径
         s = Math.round(s * 10000) / 10000;
@@ -76,10 +67,9 @@ Page({
         let i = e.detail.value;
         that.setData({
             sortIndex: i,
-            curtype: that.data.sortArray[i]
+            curtype: that.data.sortArray[i],
+            taskArray: that.taskSort()
         });
-        console.log("bindSortChange")
-        that.taskSort();
     },
     bindFilterChange:function(e) {
         let that = this;
@@ -88,31 +78,15 @@ Page({
         filterIndex: i,
         curFilter: that.data.filterArray[i]
         });
-        console.log("bindFilterChange")
     },
     goTaskDetail: function(e){
         wx.navigateTo({
             url: '../taskDetail/taskDetail?id='+e.currentTarget.id,
-            success: function () {
-                console.log('success')
-            },
-            fail: function () {
-                console.log('fail')
-            },
-            complete: function () {
-
-            }
         })
     },
     goCreateTask:function() {
         wx.navigateTo({
             url: '../createTask/createTask',
-            success:function() {
-                console.log('success')
-            },
-            fail:function() {
-                console.log('fail')
-            },
         })
     },
     goMyInfo:function() {
@@ -142,8 +116,6 @@ Page({
                 }
             }
         }
-        this.setData({
-            taskArray: task_list
-        })
+        return task_list
     }
 })
