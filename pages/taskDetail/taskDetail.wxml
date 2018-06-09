@@ -61,7 +61,7 @@
                     <switch bindchange='bindSwitchChange' disabled='{{!canAccess}}'/>
                 </view>
             </view>
-            <view wx:if="{{canAccess}}" class="weui-cell">
+            <view wx:if="{{canAccess && openPrivate}}" class="weui-cell">
                 <view class="weui-cell__bd">
                     <textarea class="weui-textarea" placeholder="快递箱密码、手机号等私密信息（仅可被领取者看到）" style="height: 4em" bindconfirm="setHiddenMsg" value="{{hiddenMsg}}" name="hiddenMsg" disabled="true"/>
                 </view>

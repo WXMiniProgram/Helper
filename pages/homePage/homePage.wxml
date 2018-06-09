@@ -48,7 +48,7 @@
 
         <view class="{{isMyInfo?'homepage-bottom-hide':'homepage-bottom'}}">
             <view class="homepage-bottom-center">
-            <button class="circle-button create-button" bindtap="goCreateTask" type="default" size="default" style='background-color:#FFCF73'>
+            <button class="circle-button create-button" hover-class="navigator" bindtap="goCreateTask" type="default" size="default" style='background-color:#FFCF73'>
                 <view class='iconfont icon-add homepage-create-icon'></view>
             </button>
             </view>

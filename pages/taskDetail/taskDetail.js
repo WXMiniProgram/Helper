@@ -131,5 +131,12 @@ Page({
             latitude: that.data.location.latitude,
             longitude: that.data.location.longitude,
         })
-    }
+    },
+    bindSwitchChange: function (e) {
+        var that = this;
+        var i = e.detail.value;
+        that.setData({
+            openPrivate: i,
+        });
+    },
 })
