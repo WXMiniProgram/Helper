@@ -23,32 +23,6 @@ Page({
             }
         })
     },
-   /* uploadImg: function(){
-        let that = this;
-        wx.uploadFile({
-            url: 'https://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
-            filePath: that.data.file,
-            name: 'image',
-            formData: {
-                'username': 'username'
-            },
-            success: function (res) {
-                var data = res.data
-                // 跳转到 成功操作页面
-                wx.navigateTo({
-                    url: '../response/response_success'
-                })
-            },
-            fail: function(err){
-                that.setData({
-                    file: null
-                });
-                wx.navigateTo({
-                    url: '../response/response_fail'
-                });
-            }
-        })
-    },*/
     formSubmit: function(detail){
         let values = detail["detail"]["value"];
         let that = this;
@@ -57,7 +31,7 @@ Page({
             openid: openid,
             name: values["name"],
             school: values["school"],
-            schoolId: values["schoolId"],
+            school_id: values["schoolId"],
             avatar: that.data.avatarURL,
             username: that.data.nickname
         }

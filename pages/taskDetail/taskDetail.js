@@ -94,7 +94,6 @@ Page({
             "hunter": hunter,
             "status": 3
         }
-        console.log("task_id", that.data.id);
         app.reqToServer("tasks/"+that.data.id, "POST", form, (res)=>{
             app.openToast("领取成功!");
             wx.reLaunch({
@@ -109,9 +108,9 @@ Page({
         }
         app.reqToServer("tasks/"+ that.data.id, "POST", form, (res)=>{
             app.openToast("任务完成");
-            wx.navigateBack({
-                delta: 1
-            });
+            wx.redirectTo({
+                url: '../homePage/homePage',
+            })
         })
     },
     cancel: function(){
@@ -121,9 +120,9 @@ Page({
         }
         app.reqToServer("tasks/" + that.data.id, "POST", form, (res) => {
             app.openToast("任务已取消");
-            wx.navigateBack({
-                delta: 1
-            });
+            wx.redirectTo({
+                url: '../homePage/homePage',
+            })
         })
     },
     showLocation: function () {

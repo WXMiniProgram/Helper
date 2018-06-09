@@ -10,9 +10,10 @@
       "pages/response/response_fail"
   ],
   "window":{
+    "enablePullDownRefresh": true,
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Helper",
+    "navigationBarTitleText": "HelperHub",
     "navigationBarTextStyle":"black"
   }
 }

@@ -80,7 +80,6 @@ Page({
         app.openConfirm("确认发布？", "任务完成前仍可随时更改", "发送", "取消", (e) => {
             if(e.confirm){
                 app.reqToServer('tasks/', "POST", form, (res) => {
-                    console.log("submit response", res);
                     if(res["statusCode"] == 200){
                         app.openToast("发布成功");
                         wx.reLaunch({

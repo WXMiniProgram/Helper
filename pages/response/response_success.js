@@ -9,12 +9,9 @@ Page({
         content: "",
     },
     onLoad: function(options){
-        console.log(options);
-        var params = options.params,
-            that = this;
-        that.setData({
-            title: params["title"],
-            content: params["content"],
+        this.setData({
+            title: options["title"],
+            content: options["content"],
         })
     },
     returnHome: function(e){

@@ -15,7 +15,7 @@ App({
         var that = this;
         logs.unshift(Date.now())
         wx.setStorageSync('logs', logs);
-        that.globalData.userInfo = wx.getStorageSync("userInfo");
+        // that.globalData.userInfo = wx.getStorageSync("userInfo");
         wx.getLocation({
             success: function (res) {
                 that.globalData.location = res;
@@ -25,12 +25,11 @@ App({
                         success: res => {
                             that.reqToServer("user/login/" + res.code, "GET", null, (res) => {
                                 let data = res["data"]["result"];
-                                console.log("userData", data);
                                 wx.setStorage({
                                     key: 'userInfo',
                                     data: data,
                                 })
-                                that.globalData.userInfo = res.data;
+                                that.globalData.userInfo = data;
                                 if (that.homePageLoad) {
                                     that.homePageLoad();
                                 }
@@ -66,6 +65,27 @@ App({
             })
         }*/
         
+    },
+    refreshData: function(func){ // 拿到新数据后的回调
+        let that = this;
+        wx.getLocation({
+            success: function (res) {
+                that.globalData.location = res;
+                wx.login({
+                    success: res => {
+                        that.reqToServer("user/login/" + res.code, "GET", null, (res) => {
+                            let data = res["data"]["result"];
+                            wx.setStorage({
+                                key: 'userInfo',
+                                data: data,
+                            })
+                            that.globalData.userInfo = data;
+                            func();
+                        });
+                    }
+                })
+            },
+        });
     },
      /**
          * openid: ID String

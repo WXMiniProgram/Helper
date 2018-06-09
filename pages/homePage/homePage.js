@@ -10,10 +10,12 @@ Page({
         sortArray: ['距离', '赏金'],
         filterIndex: 0,
         filterArray: ['全部', '取快递', '借东西', '其他'],
+        options: "",
         taskArray: []
     },
     onLoad: function (options) {
         let that = this;
+        that.data.options = options;
         if (!app.globalData.location) {
             app.homePageLoad = ()=>{
                 that.setData({
@@ -33,21 +35,34 @@ Page({
             that.loadTaskArray(options);
         }
     },
+    onPullDownRefresh: function(){
+        let that = this;
+        wx.showNavigationBarLoading(); 
+        app.refreshData(()=>{
+            that.setData({
+                location: app.globalData.location
+            });
+            that.loadTaskArray(that.data.options);
+        })
+    },
     loadTaskArray: function(options) {
         let that = this;
-        let hasParam = app.isValid(options.mode) && app.isValid(options.user)
+        let hasParam = app.isValid(options) && app.isValid(options.mode) && app.isValid(options.user)
         let url = hasParam ? "tasks/" + options.mode + "/" + options.user : "tasks"
         app.reqToServer(url, "GET", null, (data) => {
             let task_list = data["data"]["result"]
             for (let i = 0; i < task_list.length; i++) {
                 task_list[i]["distance"] = that.calcDistance(task_list[i].taskloc)
             }
-            console.log(task_list);
             that.setData({
                 isMyInfo: hasParam,
                 taskArray: that.taskSort(task_list, hasParam),
             })
             wx.hideLoading();
+            // 隐藏顶部加载框  
+            wx.hideNavigationBarLoading();
+            // 停止下拉动作  
+            wx.stopPullDownRefresh(); 
         })
     },
     calcDistance: function(location){
